@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="books_details_form" model="ir.ui.view">
+            <field name="name">book.details.form</field>
+            <field name="model">book.details</field>
+            <field name="arch" type="xml">
+                <form string="Book Details">
+                    <sheet>
+                        <group col="4" colspan="2">
+                            <field name="name"/>
+                            <field name="author"/>
+                            <field name="price"/>
+                            <field name="description"/>
+                            <field name="availability"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="books_details_tree" model="ir.ui.view">
+            <field name="name">book.details.tree</field>
+            <field name="model">book.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="author"/>
+                    <field name="price"/>
+                    <field name="description"/>
+                    <field name="availability"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Action on menu item -->
+
+         <record id="action_list_books" model="ir.actions.act_window">
+            <field name="name">Books</field>
+            <field name="res_model">book.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record of student
+              </p><p>
+                Odoo helps you easily track all activities related to a supplier.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Books" id="college_management_books" parent="college_management_root" action="college_management.action_list_books" />
+
+
+    </data>
+</odoo>

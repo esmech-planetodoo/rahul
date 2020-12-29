@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Views for student details-->
+        <record id="students_details_form" model="ir.ui.view">
+            <field name="name">student.details.form</field>
+            <field name="model">students.details</field>
+            <field name="arch" type="xml">
+                <form string="Student Details">
+                    <sheet>
+                        <group col="4" colspan="2">
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="full_name"/>
+                            <field name="roll_number"/>
+                            <field name="gender"/>
+                        </group>
+                        <group col="4" colspan="2">
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Hobbies">
+                                <group>
+                                    <field name="reading"/>
+                                    <field name="swimming"/>
+                                    <field name="dancing"/>
+                                </group>
+                            </page>
+
+                            <page string="Education Details">
+                                <field name="education_ids">
+                                     <tree>
+                                        <field name="chemistry_marks" />
+                                        <field name="physics_marks" />
+                                        <field name="maths_marks" />
+                                        <field name="english_marks" />
+                                        <field name="total_marks" />
+                                        <field name="percentage" />
+                                        <field name="status" />
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Subject Books">
+
+                            </page>
+
+                            <page string="Student Timetable">
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <record id="students_details_tree" model="ir.ui.view">
+            <field name="name">student.details.tree</field>
+            <field name="model">students.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="full_name"/>
+                    <field name="roll_number"/>
+                    <field name="gender"/>
+                    <field name="dob"/>
+                    <field name="age"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <!-- Action on menu item -->
+
+         <record id="action_list_student" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">students.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record of student
+              </p><p>
+                Odoo helps you easily track all activities related to a supplier.
+              </p>
+            </field>
+        </record>
+
+         <!-- Top menu item -->
+        <menuitem name="College Management" id="college_management_root" />
+
+
+        <menuitem name="Student" id="college_management_student" parent="college_management_root" action="college_management.action_list_student" />
+<!--        <menuitem name="Menu 2" id="college_management_menu2" parent="college_management_root" />-->
+
+
+
+    </data>
+</odoo>
