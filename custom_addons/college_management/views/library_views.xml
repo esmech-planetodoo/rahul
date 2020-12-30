@@ -8,20 +8,23 @@
             <field name="arch" type="xml">
                 <form string="Book Details">
                     <sheet>
-                        <group>
-                            <field name="students_ids">
-                                <group>
-                                    <field name="full_name" />
-                                </group>
-                            </field>
-                            <field name="books_ids">
-                                <group>
-                                    <field name="name" />
-                                </group>
-                            </field>
-                            <field name="issue_date" />
-                            <field name="return_date" />
-                        </group>
+
+                            <field name="students_ids"/>
+
+<!--                        <group>-->
+<!--                            <field name="students_ids" />-->
+<!--                            <field name="return_date" />-->
+<!--                        </group>-->
+<!--                        <notebook>-->
+<!--                            <page string="Child Data">-->
+<!--                                &lt;!&ndash; you can display child data like code below &ndash;&gt;-->
+<!--                                <field name="students_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="full_name"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
                     </sheet>
                 </form>
             </field>
@@ -33,11 +36,8 @@
             <field name="model">library.details</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
-                    <field name="author"/>
-                    <field name="price"/>
-                    <field name="description"/>
-                    <field name="availability"/>
+                    <field name="issue_date" />
+                    <field name="return_date" />
                 </tree>
             </field>
         </record>

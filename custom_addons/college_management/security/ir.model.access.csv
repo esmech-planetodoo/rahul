@@ -3,3 +3,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_student_details,access.student.details,model_students_details,base.group_user,1,1,1,1
 access_education_details,access.education.details,model_education_details,base.group_user,1,1,1,1
 access_book_details,access.book.details,model_book_details,base.group_user,1,1,1,1
+access_library_details,access.library.details,model_library_details,base.group_user,1,1,1,1

@@ -20,7 +20,9 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base',
+
+                ],
 
     # always loaded
     'data': [
@@ -28,6 +30,7 @@
         'views/students_views.xml',
         'views/books_views.xml',
         'views/library_views.xml',
+        'views/teachers_views.xml',
         'views/views.xml',
         'views/templates.xml',
     ],

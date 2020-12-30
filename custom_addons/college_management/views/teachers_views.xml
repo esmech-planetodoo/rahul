@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="teacher_details_form" model="ir.ui.view">
+            <field name="name">teacher.details.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                 <notebook position="inside">
+                    <page string="Teacher">
+                        <group>
+                            <field name="teacher_name"/>
+                            <field name="salary"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+
+<!--        <record id="teacher_details_tree" model="ir.ui.view">-->
+<!--            <field name="name">teacher.details.tree</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="teacher_name" />-->
+<!--                    <field name="salary" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!-- Action on menu item -->
+
+         <record id="action_list_teachers" model="ir.actions.act_window">
+            <field name="name">Teachers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record of student
+              </p><p>
+                Odoo helps you easily track all activities related to a supplier.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Teachers" id="college_management_teachers" parent="college_management_root" action="college_management.action_list_teachers" />
+
+
+    </data>
+</odoo>

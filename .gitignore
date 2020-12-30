@@ -1,0 +1,14 @@
+/.idea/
+/odoo/
+/odoo.egg-info/
+/setup/
+/venv/
+/LICENSE
+/MANIFEST.in
+/odoo.conf
+/odoo-bin
+/README.md
+/PKG-INFO
+/requirements.txt
+/setup.cfg
+/setup.py
