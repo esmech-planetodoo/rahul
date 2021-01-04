@@ -5,9 +5,17 @@ class Library(models.Model):
     _name = "library.details"
     _description = "books issued in library details"
 
-    # students_ids = fields.One2many('students.details', 'library_ids', "Students")
-    students_ids = fields.Many2one('students.details', "Students ID")
-    books_ids = fields.One2many('book.details', 'library_ids', "Books")
+    student_id = fields.Many2one("students.details", "Student Name")
+
+    libraryline_ids = fields.One2many("library.line", 'library_id', "Library Details")
+
+
+class LibraryLine(models.Model):
+    _name = "library.line"
+    _description = "class for holding info"
 
     issue_date = fields.Date("Issue Date")
     return_date = fields.Date("Return Date")
+
+    book_id = fields.Many2one('book.details', "Book name")
+    library_id = fields.Many2one('library.details', "lib details")

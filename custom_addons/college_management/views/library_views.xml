@@ -8,23 +8,33 @@
             <field name="arch" type="xml">
                 <form string="Book Details">
                     <sheet>
-
-                            <field name="students_ids"/>
-
-<!--                        <group>-->
-<!--                            <field name="students_ids" />-->
-<!--                            <field name="return_date" />-->
-<!--                        </group>-->
-<!--                        <notebook>-->
-<!--                            <page string="Child Data">-->
-<!--                                &lt;!&ndash; you can display child data like code below &ndash;&gt;-->
-<!--                                <field name="students_ids">-->
-<!--                                    <tree editable="bottom">-->
-<!--                                        <field name="full_name"/>-->
-<!--                                    </tree>-->
-<!--                                </field>-->
-<!--                            </page>-->
-<!--                        </notebook>-->
+                        <group>
+                            <group>
+                                <field name="student_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Issue Details">
+                                <group>
+                                    <field name="libraryline_ids">
+                                        <tree editable="bottom">
+                                            <field name="book_id"/>
+                                            <field name="issue_date"/>
+                                            <field name="return_date"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="book_id"/>
+                                                    <field name="issue_date"/>
+                                                    <field name="return_date"/>
+                                                </group>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -36,8 +46,10 @@
             <field name="model">library.details</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="issue_date" />
-                    <field name="return_date" />
+                    <field name="student_id" />
+                    <field name="libraryline_ids"/>
+
+
                 </tree>
             </field>
         </record>
@@ -45,16 +57,16 @@
 
         <!-- Action on menu item -->
 
-         <record id="action_list_library" model="ir.actions.act_window">
+        <record id="action_list_library" model="ir.actions.act_window">
             <field name="name">Library</field>
             <field name="res_model">library.details</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                Create a new record of student
-              </p><p>
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new record of student
+                </p><p>
                 Odoo helps you easily track all activities related to a supplier.
-              </p>
+            </p>
             </field>
         </record>
 

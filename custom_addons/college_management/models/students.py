@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 class Student(models.Model):
     _name = 'students.details'
     _description = 'student details'
+    _rec_name = 'first_name'
+
     education_ids = fields.One2many('education.details', 'student_ids', "Education")
-    # library_ids = fields.One2many('library.details', 'students_ids', "library ID")
 
     first_name = fields.Char("First Name", required=True, default="First")
     last_name = fields.Char("Last Name", required=True, default="Last")
