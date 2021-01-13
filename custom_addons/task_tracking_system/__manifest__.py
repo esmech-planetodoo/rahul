@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "college_management",
+    'name': "Task Tracking System",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -28,11 +28,6 @@
     'data': [
         'security/ir.model.access.csv',
         'wizards/college_management_grace_wizard_views.xml',
-        'views/students_views.xml',
-        'views/books_views.xml',
-        'views/library_views.xml',
-        'views/teachers_views.xml',
-        'views/department_views.xml',
 
     ],
     # only loaded in demonstration mode

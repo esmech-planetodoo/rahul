@@ -13,6 +13,7 @@ class Library(models.Model):
 class LibraryLine(models.Model):
     _name = "library.line"
     _description = "class for holding info"
+    _rec_name = 'book_id'
 
     issue_date = fields.Date("Issue Date")
     return_date = fields.Date("Return Date")

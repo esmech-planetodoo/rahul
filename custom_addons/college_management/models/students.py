@@ -8,11 +8,11 @@ class Student(models.Model):
     _rec_name = 'first_name'
 
     education_ids = fields.One2many('education.details', 'student_ids', "Education")
-
+    department_ids = fields.Many2many('department.details', string="Departments")
     first_name = fields.Char("First Name", required=True, default="First")
     last_name = fields.Char("Last Name", required=True, default="Last")
     full_name = fields.Char("Full Name", compute='_full_name')
-    roll_number = fields.Integer("Roll Number", required=True)
+    roll_number = fields.Char("Roll Number", required=True, readonly=True, default='New')
     gender = fields.Selection([('M', 'Male'), ('F', 'Female')], "Gender")
     dob = fields.Date("Date of birth")
     age = fields.Integer("Age", compute='_age_count', default=17)
@@ -37,19 +37,30 @@ class Student(models.Model):
                 record.age = (datetime.today().date() - datetime.strptime(str(record.dob),
                                                                           '%Y-%m-%d').date()) // timedelta(days=365)
 
+    def button_done(self):
+        for rec in self:
+            rec.write({'state': 'done'})
+
+    @api.model
+    def create(self,vals):
+        if vals.get('roll_number', 'New') == 'New':
+            vals['roll_number'] = self.env['ir.sequence'].next_by_code('self.service') or 'New'
+        result = super()
+
 
 class Education(models.Model):
     _name = 'education.details'
     _description = 'student marks details'
     student_ids = fields.Many2one('students.details', "Main Class")
+    # grace_ids = fields.Many2one('college.management.grace.wizard', "grace ids")
 
     chemistry_marks = fields.Float("Chemistry")
     physics_marks = fields.Float("Physics")
     maths_marks = fields.Float("Maths")
     english_marks = fields.Float("English")
-    total_marks = fields.Float("Total Marks", compute='_marks_total')
-    percentage = fields.Integer("Percentage", compute='_marks_percentage')
-    status = fields.Char("Status", compute='_status')
+    total_marks = fields.Float("Total Marks", compute='_marks_total', store=True)
+    percentage = fields.Integer("Percentage", compute='_marks_percentage', store=True)
+    status = fields.Char("Status", compute='_status', store=True)
 
     # Compute fields
 
@@ -73,3 +84,10 @@ class Education(models.Model):
                 record.status = 'Fail'
             else:
                 record.status = 'Pass'
+
+
+class Department(models.Model):
+    _name = 'department.details'
+    _description = 'different department according to subjects'
+
+    dept_name = fields.Char("Name")

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="department_details_form" model="ir.ui.view">
+            <field name="name">department.details.form</field>
+            <field name="model">department.details</field>
+            <field name="arch" type="xml">
+                <form string="Department Details">
+                    <sheet>
+                        <group col="4" colspan="2">
+                            <field name="dept_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="department_details_tree" model="ir.ui.view">
+            <field name="name">department.details.tree</field>
+            <field name="model">department.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="dept_name"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Action on menu item -->
+
+         <record id="action_list_department" model="ir.actions.act_window">
+            <field name="name">Department</field>
+            <field name="res_model">department.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new record of student
+              </p><p>
+                Odoo helps you easily track all activities related to a supplier.
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Department" id="college_management_department" parent="college_management_root" action="college_management.action_list_department" />
+
+
+    </data>
+</odoo>

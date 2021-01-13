@@ -4,4 +4,6 @@ access_student_details,access.student.details,model_students_details,base.group_
 access_education_details,access.education.details,model_education_details,base.group_user,1,1,1,1
 access_book_details,access.book.details,model_book_details,base.group_user,1,1,1,1
 access_library_details,access.library.details,model_library_details,base.group_user,1,1,1,1
-access_library_line,access.library.line,model_library_line,base.group_user,1,1,1,1
+access_college.library_line,access.library.line,model_library_line,base.group_user,1,1,1,1
+access_college_management_grace_wizard,access.college.management.grace.wizard,model_college_management_grace_wizard,base.group_user,1,1,1,1
+access_college.department.details,access.department.details,model_department_details,base.group_user,1,1,1,1

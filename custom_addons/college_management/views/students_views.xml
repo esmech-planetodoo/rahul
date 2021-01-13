@@ -7,6 +7,12 @@
             <field name="model">students.details</field>
             <field name="arch" type="xml">
                 <form string="Student Details">
+<!--                    <header>-->
+<!--                        <field name="education_ids" attrs="{'invisible': [('status', '=', Fail)]}">-->
+<!--                        </field>-->
+
+<!--                    </header>-->
+
                     <sheet>
                         <group col="4" colspan="2">
                             <field name="first_name"/>
@@ -33,7 +39,8 @@
 
                             <page string="Education Details">
                                 <field name="education_ids">
-                                     <tree>
+                                     <tree editable="bottom">
+                                        <button name="%(college_management.college_management_grace_wizard_action)d" string="Add Grace" attrs="{'invisible': [('status', '!=', 'Fail')]}"  class="oe_highlight" type="action" />
                                         <field name="chemistry_marks" />
                                         <field name="physics_marks" />
                                         <field name="maths_marks" />
@@ -41,16 +48,21 @@
                                         <field name="total_marks" />
                                         <field name="percentage" />
                                         <field name="status" />
+
                                     </tree>
                                 </field>
                             </page>
 
                             <page string="Subject Books">
-
+                                <group>
+                                    <field name="department_ids"/>
+                                </group>
                             </page>
 
                             <page string="Student Timetable">
+                                <div class="oe_title">
 
+                                </div>
                             </page>
                         </notebook>
                     </sheet>
@@ -95,6 +107,8 @@
               </p>
             </field>
         </record>
+
+
 
          <!-- Top menu item -->
         <menuitem name="College Management" id="college_management_root" />

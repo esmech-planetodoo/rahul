@@ -47,7 +47,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="student_id" />
-                    <field name="libraryline_ids"/>
+
 
 
                 </tree>

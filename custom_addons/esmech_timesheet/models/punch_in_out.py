@@ -1,0 +1,54 @@
+from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+
+
+class PunchDetails(models.Model):
+    """ Model for Main task creation """
+
+    _name = 'punch.details'
+    _description = 'Maintenance Stage'
+
+    organization = fields.Char("Organization")
+    employee_id = fields.Char("Employee ID")
+    employee = fields.Char("Employee")
+    punch_date = fields.Date("Punch Date")
+    punch_in_time = fields.Float("Punch In Time (HH:MM:SS)")
+    punch_out_time = fields.Float("Punch Out Time (HH:MM:SS)")
+    shift_hours = fields.Float("Shift Hours (HH:MM:SS)")
+    hours_worked = fields.Float("Hours Worked (HH:MM:SS)")
+    reason = fields.Text("Reason")
+    manual = fields.Boolean("Manual")
+    attendance_status = fields.Selection([
+        ('Absent', "Absent"),
+        ('Comp off', "Comp off"),
+        ('Half day', "Half day"),
+        ('Holiday', "Holiday"),
+        ('Leave', "Leave"),
+        ('Loss of pay', "Loss of pay"),
+        ('Maternity leave', "Maternity leave"),
+        ('On tour', "On tour"),
+        ('Overtime hour', "Overtime hour"),
+        ('Present', "Present"),
+        ('Weekend', "Weekend"),
+        ('Worked On Weekend', "Worked On Weekend"),
+    ], string="Attendance Status")
+
+    leave_type = fields.Selection([
+        ('Casual Leave', "Casual Leave"),
+        ('Comp off', "Comp off"),
+        ('Leave without pay', "Leave without pay"),
+        ('Other leave', "Other leave"),
+        ('Priviledged leave', "Priviledged leave"),
+        ('short leave', "short leave"),
+        ('sick leave', "sick leave"),
+    ], string="Leave Type")
+
+    leave_status = fields.Selection([
+        ('Approved', "Approved"),
+        ('Draft', "Draft"),
+        ('Pending', "Pending"),
+        ('Rejected', "Rejected"),
+    ], string="Leave Status")
+
+
