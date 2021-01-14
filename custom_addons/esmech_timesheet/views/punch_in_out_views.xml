@@ -6,30 +6,41 @@
             <field name="arch" type="xml">
                 <form string="Details">
                     <sheet>
-                        <group>
-                            <group col="4" colspan="2">
+                            <!-- Form uppper body -->
+                            <group col="6">
                                 <field name="organization" />
                                 <field name="employee_id"/>
                                 <field name="employee"/>
                             </group>
-                            <group col="4" colspan="2">
-
+                            <group col="6">
+                                <field name="punch_date"/>
+                                <field name="punch_in_time" widget="timepicker"/>
+                                <field name="punch_out_time" widget="timepicker"/>
+                                <field name="shift_hours"/>
+                                <field name="hours_worked"/>
                             </group>
-                            <group col="4" colspan="2">
-
+                            <group col="6">
+                                <field name="manual"/>
+                                <field name="attendance_status"/>
+                                <field name="reason"/>
+                                <field name="leave_type"/>
+                                <field name="leave_status"/>
                             </group>
 
-                            <field name="punch_date"/>
-                            <field name="punch_in_time" widget="float_time"/>
-                            <field name="punch_out_time" widget="float_time"/>
-                            <field name="shift_hours"/>
-                            <field name="hours_worked"/>
-                            <field name="reason"/>
-                            <field name="manual"/>
-                            <field name="attendance_status"/>
-                            <field name="leave_type"/>
-                            <field name="leave_status"/>
-                        </group>
+                            <!-- Form Lower body -->
+                            <notebook>
+                                <page  string="Details">
+                                    <field name="attendence_ids">
+                                        <tree editable="bottom">
+                                            <field name="employee_id"/>
+                                            <field name="punch_id"/>
+                                            <field name="punch_date"/>
+                                            <field name="punch_time"/>
+                                            <field name="processed"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
                     </sheet>
                 </form>
             </field>

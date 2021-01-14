@@ -9,6 +9,7 @@ class PunchDetails(models.Model):
     _name = 'punch.details'
     _description = 'Maintenance Stage'
 
+    attendence_ids = fields.One2many('attendance.details', 'punch_id', "attendance id")
     organization = fields.Char("Organization")
     employee_id = fields.Char("Employee ID")
     employee = fields.Char("Employee")
@@ -52,3 +53,23 @@ class PunchDetails(models.Model):
     ], string="Leave Status")
 
 
+class AttendanceDetails(models.Model):
+    _name = 'attendance.details'
+    _description = 'Attendence details of employees'
+
+    punch_id = fields.Many2one('punch.details', "punch id")
+    active = fields.Boolean("Active")
+    punch_date = fields.Date("Punch Date")
+    employee_id = fields.Char("Employee ID")
+    punch_time = fields.Char("Punch Time")
+    processed = fields.Char("Processed")
+
+# class AttendanceLine(models.Model):
+#     _name = 'attendance.line'
+#     _description = 'Detail of '
+#
+#     active = fields.Boolean("Active")
+#     punch_date = fields.Date("Punch Date")
+#     employee_id = fields.Char("Employee ID")
+#     punch_time = fields.Char("Punch Time")
+#     processed = fields.Char("Processed")
