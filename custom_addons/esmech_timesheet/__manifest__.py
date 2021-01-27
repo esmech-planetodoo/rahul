@@ -17,9 +17,10 @@ Lots of reporting on time and employee tracking are provided.
 
     """,
     'website': 'https://www.odoo.com/page/timesheet-mobile-app',
-    'depends': ['base'],
+    'depends': ['base', 'hr'],
     'data': [
         'security/ir.model.access.csv',
+        'views/record_employees_inherit_views.xml',
         'views/punch_in_out_views.xml',
 
     ],
@@ -27,7 +28,6 @@ Lots of reporting on time and employee tracking are provided.
 
     ],
     'demo': [
-        'demo/demo.xml',
     ],
     'installable': True,
     'application': False,

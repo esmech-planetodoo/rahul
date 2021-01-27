@@ -60,6 +60,7 @@
 
 
 
+
      <!-- Menu items hierachy -->
     <menuitem
         id="menu_timesheet_title"
@@ -78,4 +79,16 @@
         parent="menu_timesheet_timemanagement"
         action="timesheet_punch_action"    />
 
+    <!-- Menu items for Employee record -->
+
+    <menuitem
+        id="menu_timesheet_employees"
+        name="Employees"
+        parent="menu_timesheet_title" />
+
+    <menuitem
+        id="menu_timesheet_employee"
+        name="Employees"
+        parent="menu_timesheet_employees"
+        action="esmech_timesheet.timesheet_employee_action"    />
 </odoo>
