@@ -17,3 +17,6 @@ access_employee_leave_policy,access.employee.leave.policy,esmech_timesheet.model
 access_employee_experience,access.employee.experience,esmech_timesheet.model_employee_experience,base.group_user,1,1,1,1
 access_employee_qualification,access.employee.qualification,esmech_timesheet.model_employee_qualification,base.group_user,1,1,1,1
 access_employee_bankinfo,access.employee.bankinfo,esmech_timesheet.model_employee_bankinfo,base.group_user,1,1,1,1
+access_employee_leaveinfo,access.employee.leaveinfo,esmech_timesheet.model_employee_leaveinfo,base.group_user,1,1,1,1
+access_employee_leave_details,access.employee.leave.details,esmech_timesheet.model_employee_leave_details,base.group_user,1,1,1,1
+access_employee_shift,access.employee.shift,esmech_timesheet.model_employee_shift,base.group_user,1,1,1,1

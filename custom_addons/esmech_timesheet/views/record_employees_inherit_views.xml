@@ -267,9 +267,76 @@
                         </form>
                     </field>
                 </page>
+                <page string="Leave Information" >
+                    <field name="leaveinfo_ids">
+                        <tree>
+                            <field name="employee_records_id"/>
+                            <field name="employee_name"/>
+                            <field name="leave_type"/>
+                            <field name="available_leaves"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4" >
+                                    <field name="employee_name"/>
+                                    <field name="leave_type"/>
+                                    <field name="available_leaves"/>
+                                    <field name="encashed_leaves"/>
+                                    <field name="leaves_taken"/>
+                                    <field name="accured"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <!-- Leave details kept hidden as it was not available on open bravo-->
+                <page string="Leave Details" invisible="1">
+                    <field name="employeeleave_ids">
+                        <tree>
+                            <field name="leave"/>
+                            <field name="reason"/>
+                            <field name="leave_requisition"/>
+                            <field name="employee_punch"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4" >
+                                    <field name="leave"/>
+                                    <field name="reason"/>
+                                    <field name="leave_requisition"/>
+                                    <field name="employee_punch"/>
+                                    <field name="leave_status"/>
+                                    <field name="accured_on"/>
+                                    <field name="valid_till"/>
+                                    <field name="avail_leaves"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Shift Information" >
+                    <field name="employeeshift_ids">
+                        <tree>
+                            <field name="employee_records_id"/>
+                            <field name="shift_schedule"/>
+                            <field name="start_day"/>
+                            <field name="end_day"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4" >
+                                    <field name="shift_schedule"/>
+                                    <field name="start_day"/>
+                                    <field name="end_day"/>
+                                    <field name="rotation"/>
+                                    <field name="employee_name"/>
+                                    <field name="description"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
             </xpath>
-
-
         </field>
     </record>
 

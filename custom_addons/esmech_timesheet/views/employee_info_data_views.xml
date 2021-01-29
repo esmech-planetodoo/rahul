@@ -1,0 +1,121 @@
+<odoo>
+    <data>
+
+        <record id="employee_info_data_form" model="ir.ui.view">
+            <field name="name">employee.info.data.form</field>
+            <field name="model">employee.info.data</field>
+            <field name="arch" type="xml">
+                <form string="Personal information">
+                    <sheet>
+                        <group col="4">
+                            <field name="employee_name"/>
+                            <field name="father_name"/>
+                            <field name="mother_name"/>
+                            <field name="spouse_name"/>
+                            <field name="nick_name"/>
+                            <field name="gender"/>
+                            <field name="marital"/>
+                            <field name="birthday"/>
+                            <field name="age"/>
+                            <field name="place_birth"/>
+                            <field name="blood_group"/>
+                            <field name="religion"/>
+                            <field name="dependent_no"/>
+                            <field name="country_id"/>
+                            <field name="ethnic_race"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By" />
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="employee_info_data_filter" model="ir.ui.view">
+            <field name="name">employee.info.data.select</field>
+            <field name="model">employee.info.data</field>
+            <field name="arch" type="xml">
+                <search string="Personal Information">
+                    <field name="employee_name"/>
+                    <field name="father_name"/>
+                    <field name="mother_name"/>
+                    <field name="spouse_name"/>
+                    <field name="nick_name"/>
+                    <field name="gender"/>
+                    <field name="marital"/>
+                    <field name="birthday"/>
+                    <field name="age"/>
+                    <field name="place_birth"/>
+                    <field name="blood_group"/>
+                    <field name="religion"/>
+                    <field name="dependent_no"/>
+                    <field name="country_id"/>
+                    <field name="ethnic_race"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="employee_info_data_tree" model="ir.ui.view">
+            <field name="name">employee.info.data.tree</field>
+            <field name="model">employee.info.data</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Personal Information" >
+                    <field name="employee_name"/>
+                    <field name="father_name"/>
+                    <field name="mother_name"/>
+                    <field name="spouse_name"/>
+                    <field name="nick_name"/>
+                    <field name="gender"/>
+                    <field name="marital"/>
+                    <field name="birthday"/>
+                    <field name="age"/>
+                    <field name="place_birth"/>
+                    <field name="blood_group"/>
+                    <field name="religion"/>
+                    <field name="dependent_no"/>
+                    <field name="country_id"/>
+                    <field name="ethnic_race"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="employee_info_data_action" model="ir.actions.act_window">
+            <field name="name">Personal Info</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.info.data</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.employee_info_data_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.employee_info_data_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.employee_info_data_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p><p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+            </field>
+        </record>
+        <menuitem id="info_data_menu"  name="Personal Information"  parent="menu_timesheet_config"  action="employee_info_data_action" sequence="1"  />
+
+    </data>
+</odoo>

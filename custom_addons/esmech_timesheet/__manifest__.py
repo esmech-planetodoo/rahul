@@ -20,6 +20,9 @@ Lots of reporting on time and employee tracking are provided.
     'depends': ['base', 'hr'],
     'data': [
         'security/ir.model.access.csv',
+        'views/menu_items_views.xml',
+        'views/employee_job_views.xml',
+        'views/employee_info_data_views.xml',
         'views/record_employees_inherit_views.xml',
         'views/punch_in_out_views.xml',
 

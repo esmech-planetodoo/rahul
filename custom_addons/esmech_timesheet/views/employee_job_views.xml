@@ -1,0 +1,139 @@
+<odoo>
+    <data>
+        <record id="esmech_employee_job_form" model="ir.ui.view">
+            <field name="name">employee.job.form</field>
+            <field name="model">employee.job</field>
+            <field name="arch" type="xml">
+                <form string="Employee Job Order" class="o_purchase_order">
+                    <header>
+                    </header>
+                    <sheet>
+                        <label class="oe_edit_only" for="employee_name" string="Name"/>
+                        <h2><field name="employee_name" required="1" placeholder="Name"/></h2>
+                        <group col="6" >
+                            <field name="employee_records_id" />
+                            <field name="payment_method_id"/>
+                            <field name="financial_acc"/>
+                            <field name="weekly_off_id"/>
+                            <field name="work_shift_id"/>
+                            <field name="designation_id"/>
+                            <field name="team_id"/>
+                            <field name="pay_grade_id"/>
+                            <field name="emp_category_id"/>
+                            <field name="emp_department_id"/>
+                            <field name="date_joining"/>
+                            <field name="years_service"/>
+                            <field name="probation_period"/>
+                            <field name="confirmation_date"/>
+                            <field name="retirement_date"/>
+                            <field name="relieved_date"/>
+                            <field name="reason_leaving"/>
+                            <field name="leave_policy_id"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By" />
+                            </group>
+                        </footer>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_esmech_employee_job_filter" model="ir.ui.view">
+            <field name="name">employee.job.select</field>
+            <field name="model">employee.job</field>
+            <field name="arch" type="xml">
+                <search string="Search Purchase Order">
+                    <field name="employee_records_id" />
+                    <field name="employee_name"/>
+                    <field name="payment_method_id"/>
+                    <field name="financial_acc"/>
+                    <field name="weekly_off_id"/>
+                    <field name="work_shift_id"/>
+                    <field name="designation_id"/>
+                    <field name="team_id"/>
+                    <field name="pay_grade_id"/>
+                    <field name="emp_category_id"/>
+                    <field name="emp_department_id"/>
+                    <field name="date_joining"/>
+                    <field name="years_service"/>
+                    <field name="probation_period"/>
+                    <field name="confirmation_date"/>
+                    <field name="retirement_date"/>
+                    <field name="relieved_date"/>
+                    <field name="reason_leaving"/>
+                    <field name="leave_policy_id"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="esmech_employee_job_tree" model="ir.ui.view">
+            <field name="name">employee.job.tree</field>
+            <field name="model">employee.job</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Purchase Order" >
+                    <field name="employee_records_id" />
+                    <field name="employee_name"/>
+                    <field name="payment_method_id"/>
+                    <field name="financial_acc"/>
+                    <field name="weekly_off_id"/>
+                    <field name="work_shift_id"/>
+                    <field name="designation_id"/>
+                    <field name="team_id"/>
+                    <field name="pay_grade_id"/>
+                    <field name="emp_category_id"/>
+                    <field name="emp_department_id"/>
+                    <field name="date_joining"/>
+                    <field name="years_service"/>
+                    <field name="probation_period"/>
+                    <field name="confirmation_date"/>
+                    <field name="retirement_date"/>
+                    <field name="relieved_date"/>
+                    <field name="reason_leaving"/>
+                    <field name="leave_policy_id"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="esmech_job_data_action" model="ir.actions.act_window">
+            <field name="name">Employee Job</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.job</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.view_esmech_employee_job_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.esmech_employee_job_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.esmech_employee_job_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p><p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+            </field>
+        </record>
+
+        <menuitem id="job_data_menu"  name="JObs"  parent="esmech_timesheet.menu_timesheet_config"  action="esmech_job_data_action" sequence="2"  />
+
+
+
+    </data>
+</odoo>

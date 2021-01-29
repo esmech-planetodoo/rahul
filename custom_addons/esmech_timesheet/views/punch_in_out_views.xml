@@ -61,34 +61,6 @@
 
 
 
-     <!-- Menu items hierachy -->
-    <menuitem
-        id="menu_timesheet_title"
-        name="Timesheet"
-        web_icon="esmech_timesheet,static/main/icon.png"
-        sequence="110"/>
 
-    <menuitem
-        id="menu_timesheet_timemanagement"
-        name="Time Management"
-        parent="menu_timesheet_title" />
 
-    <menuitem
-        id="menu_timesheet_punch"
-        name="Punch In/Out"
-        parent="menu_timesheet_timemanagement"
-        action="timesheet_punch_action"    />
-
-    <!-- Menu items for Employee record -->
-
-    <menuitem
-        id="menu_timesheet_employees"
-        name="Employees"
-        parent="menu_timesheet_title" />
-
-    <menuitem
-        id="menu_timesheet_employee"
-        name="Employees"
-        parent="menu_timesheet_employees"
-        action="esmech_timesheet.timesheet_employee_action"    />
 </odoo>
