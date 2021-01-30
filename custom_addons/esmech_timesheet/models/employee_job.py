@@ -19,7 +19,7 @@ class EmployeeJob(models.Model):
     team_id = fields.Many2one('employee.team', "Team")
     pay_grade_id = fields.Many2one('employee.pay.grade', "Pay Grade")
     emp_category_id = fields.Many2one('employee.category', "Employee Category")
-    emp_department_id = fields.Many2one('employee.department', "Employee Category")
+    emp_department_id = fields.Many2one('employee.department', "Employee Department")
     date_joining = fields.Date("Date of Joining")
     years_service = fields.Char("Years Of Service")
     probation_period = fields.Char("Probation Period")
@@ -142,3 +142,21 @@ class LeavePolicy(models.Model):
     valid_from = fields.Date("Valid from Date")
     leave_allocation = fields.Char("Field Allocation")  # Different Class
     is_probation = fields.Boolean("Under Probation")
+
+
+# Employee Experience section
+class EmployeeExperience(models.Model):
+    """ Model for Child Work Experience Information """
+
+    _name = 'employee.experience'
+    _description = 'Employee Work Experience Information'
+
+    employee_records_id = fields.Many2one('hr.employee')
+    employee_name = fields.Char("Employee", readonly=True)
+    prev_employer = fields.Char("Previous Employer", required=True)
+    designation = fields.Char("Designation")
+    date_of_join = fields.Date("Date of Join")
+    salary = fields.Char("Salary")
+    relieved_date = fields.Date("Relieved Date")
+    reason_for_relieving = fields.Char("Reason for Relieving")
+    is_active = fields.Boolean("Active")

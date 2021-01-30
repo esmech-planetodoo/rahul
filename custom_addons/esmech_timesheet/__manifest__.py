@@ -23,7 +23,7 @@ Lots of reporting on time and employee tracking are provided.
         'views/menu_items_views.xml',
         'views/employee_job_views.xml',
         'views/employee_info_data_views.xml',
-        'views/record_employees_inherit_views.xml',
+        'views/hr_employee_views.xml',
         'views/punch_in_out_views.xml',
 
     ],

@@ -4,14 +4,10 @@
             <field name="name">employee.job.form</field>
             <field name="model">employee.job</field>
             <field name="arch" type="xml">
-                <form string="Employee Job Order" class="o_purchase_order">
-                    <header>
-                    </header>
+                <form string="Job Details">
                     <sheet>
-                        <label class="oe_edit_only" for="employee_name" string="Name"/>
-                        <h2><field name="employee_name" required="1" placeholder="Name"/></h2>
-                        <group col="6" >
-                            <field name="employee_records_id" />
+                        <group col="6">
+                            <field name="employee_records_id"/>
                             <field name="payment_method_id"/>
                             <field name="financial_acc"/>
                             <field name="weekly_off_id"/>
@@ -38,7 +34,7 @@
                                 <field name="create_date" string="Creation Date"/>
                                 <field name="create_uid" string="Created By"/>
                                 <field name="write_date" string="Updated"/>
-                                <field name="write_uid" string="Updated By" />
+                                <field name="write_uid" string="Updated By"/>
                             </group>
                         </footer>
                     </sheet>
@@ -53,7 +49,7 @@
             <field name="model">employee.job</field>
             <field name="arch" type="xml">
                 <search string="Search Purchase Order">
-                    <field name="employee_records_id" />
+                    <field name="employee_records_id"/>
                     <field name="employee_name"/>
                     <field name="payment_method_id"/>
                     <field name="financial_acc"/>
@@ -83,8 +79,8 @@
             <field name="model">employee.job</field>
             <field name="priority" eval="1"/>
             <field name="arch" type="xml">
-                <tree string="Purchase Order" >
-                    <field name="employee_records_id" />
+                <tree string="Purchase Order">
+                    <field name="employee_records_id"/>
                     <field name="employee_name"/>
                     <field name="payment_method_id"/>
                     <field name="financial_acc"/>
@@ -124,15 +120,810 @@
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new product variant
-                </p><p>
-                You must define a product for everything you sell or purchase,
-                whether it's a storable product, a consumable or a service.
-            </p>
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
             </field>
         </record>
 
-        <menuitem id="job_data_menu"  name="JObs"  parent="esmech_timesheet.menu_timesheet_config"  action="esmech_job_data_action" sequence="2"  />
+        <!--Payment Method Views-->
+        <record id="payment_method_form" model="ir.ui.view">
+            <field name="name">employee.payment.method.form</field>
+            <field name="model">employee.payment.method</field>
+            <field name="arch" type="xml">
+                <form string="Payment Method">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+
+        <record id="payment_method_filter" model="ir.ui.view">
+            <field name="name">employee.payment.method.select</field>
+            <field name="model">employee.payment.method</field>
+            <field name="arch" type="xml">
+                <search string="Payment Method">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="payment_method_tree" model="ir.ui.view">
+            <field name="name">employee.payment.method.tree</field>
+            <field name="model">employee.payment.method</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Payment Method">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="payment_method_action" model="ir.actions.act_window">
+            <field name="name">Payment Method</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.payment.method</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.payment_method_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.payment_method_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.payment_method_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Weekly Off View-->
+        <record id="weekly_off_form" model="ir.ui.view">
+            <field name="name">employee.weekly.off.form</field>
+            <field name="model">employee.weekly.off</field>
+            <field name="arch" type="xml">
+                <form string="Define Weekends">
+                    <sheet>
+                        <group col="4">
+                            <field name="monday"/>
+                            <field name="tuesday"/>
+                            <field name="wednesday"/>
+                            <field name="thursday"/>
+                            <field name="friday"/>
+                            <field name="saturday"/>
+                            <field name="sunday"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="weekly_off_filter" model="ir.ui.view">
+            <field name="name">employee.weekly.off.select</field>
+            <field name="model">employee.weekly.off</field>
+            <field name="arch" type="xml">
+                <search string="Define Weekends">
+                    <field name="monday"/>
+                    <field name="tuesday"/>
+                    <field name="wednesday"/>
+                    <field name="thursday"/>
+                    <field name="friday"/>
+                    <field name="saturday"/>
+                    <field name="sunday"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="weekly_off_tree" model="ir.ui.view">
+            <field name="name">employee.weekly.off.tree</field>
+            <field name="model">employee.weekly.off</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Define Weekends">
+                    <field name="monday"/>
+                    <field name="tuesday"/>
+                    <field name="wednesday"/>
+                    <field name="thursday"/>
+                    <field name="friday"/>
+                    <field name="saturday"/>
+                    <field name="sunday"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="weekly_off_action" model="ir.actions.act_window">
+            <field name="name">Payment Method</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.weekly.off</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.weekly_off_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.weekly_off_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.weekly_off_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Work Shift View-->
+        <record id="work_shift_form" model="ir.ui.view">
+            <field name="name">employee.work.shift.form</field>
+            <field name="model">employee.work.shift</field>
+            <field name="arch" type="xml">
+                <form string="Work Shift">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="starting_time"/>
+                            <field name="ending_time"/>
+                            <field name="duration"/>
+                            <field name="ot_applicable"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="work_shift_filter" model="ir.ui.view">
+            <field name="name">employee.work.shift.select</field>
+            <field name="model">employee.work.shift</field>
+            <field name="arch" type="xml">
+                <search string="Work Shift">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="starting_time"/>
+                    <field name="ending_time"/>
+                    <field name="duration"/>
+                    <field name="ot_applicable"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="work_shift_tree" model="ir.ui.view">
+            <field name="name">employee.work.shift.tree</field>
+            <field name="model">employee.work.shift</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Work Shift">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="starting_time"/>
+                    <field name="ending_time"/>
+                    <field name="duration"/>
+                    <field name="ot_applicable"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="work_shift_action" model="ir.actions.act_window">
+            <field name="name">Work Shift</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.work.shift</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.work_shift_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.work_shift_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.work_shift_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+
+        <!--Designation View-->
+        <record id="designation_form" model="ir.ui.view">
+            <field name="name">employee.designation.form</field>
+            <field name="model">employee.designation</field>
+            <field name="arch" type="xml">
+                <form string="Designation/Position">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                            <field name="is_compoff"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="designation_filter" model="ir.ui.view">
+            <field name="name">employee.designation.select</field>
+            <field name="model">employee.designation</field>
+            <field name="arch" type="xml">
+                <search string="Designation/Position">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                    <field name="is_compoff"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="designation_tree" model="ir.ui.view">
+            <field name="name">employee.designation.tree</field>
+            <field name="model">employee.designation</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Designation/Position">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                    <field name="is_compoff"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="designation_action" model="ir.actions.act_window">
+            <field name="name">Designation/Position</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.designation</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.designation_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.designation_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.designation_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Team View-->
+        <record id="team_form" model="ir.ui.view">
+            <field name="name">employee.team.form</field>
+            <field name="model">employee.team</field>
+            <field name="arch" type="xml">
+                <form string="Team">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="reporting_manager"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                            <field name="is_include"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="team_filter" model="ir.ui.view">
+            <field name="name">employee.team.select</field>
+            <field name="model">employee.team</field>
+            <field name="arch" type="xml">
+                <search string="Team">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="reporting_manager"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                    <field name="is_include"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="team_tree" model="ir.ui.view">
+            <field name="name">employee.team.tree</field>
+            <field name="model">employee.team</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Team">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="reporting_manager"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                    <field name="is_include"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="team_action" model="ir.actions.act_window">
+            <field name="name">Team</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.team</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.team_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.team_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.team_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Paygrade View-->
+        <record id="paygrade_form" model="ir.ui.view">
+            <field name="name">employee.pay.grade.form</field>
+            <field name="model">employee.pay.grade</field>
+            <field name="arch" type="xml">
+                <form string="Pay Grade">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="encash_leave"/>
+                            <field name="overtime_per_hrs"/>
+                            <field name="formulae"/>
+                            <field name="min_salary"/>
+                            <field name="max_salary"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="paygrade_filter" model="ir.ui.view">
+            <field name="name">employee.pay.grade.select</field>
+            <field name="model">employee.pay.grade</field>
+            <field name="arch" type="xml">
+                <search string="Pay Grade">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="encash_leave"/>
+                    <field name="overtime_per_hrs"/>
+                    <field name="formulae"/>
+                    <field name="min_salary"/>
+                    <field name="max_salary"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="paygrade_tree" model="ir.ui.view">
+            <field name="name">employee.pay.grade.tree</field>
+            <field name="model">employee.pay.grade</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Pay Grade">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="encash_leave"/>
+                    <field name="overtime_per_hrs"/>
+                    <field name="formulae"/>
+                    <field name="min_salary"/>
+                    <field name="max_salary"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="paygrade_action" model="ir.actions.act_window">
+            <field name="name">Pay Grade</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.pay.grade</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.paygrade_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.paygrade_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.paygrade_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Employee Category View-->
+        <record id="employee_category_form" model="ir.ui.view">
+            <field name="name">employee.category.form</field>
+            <field name="model">employee.category</field>
+            <field name="arch" type="xml">
+                <form string="Employee Category">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="employee_category_filter" model="ir.ui.view">
+            <field name="name">employee.category.select</field>
+            <field name="model">employee.category</field>
+            <field name="arch" type="xml">
+                <search string="Employee Category">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="employee_category_tree" model="ir.ui.view">
+            <field name="name">employee.category.tree</field>
+            <field name="model">employee.category</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Employee Category">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="employee_category_action" model="ir.actions.act_window">
+            <field name="name">Employee Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.category</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.employee_category_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.employee_category_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.employee_category_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+        <!--Employee Department View-->
+        <record id="employee_department_form" model="ir.ui.view">
+            <field name="name">employee.department.form</field>
+            <field name="model">employee.department</field>
+            <field name="arch" type="xml">
+                <form string="Employee Department">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="is_active"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="employee_department_filter" model="ir.ui.view">
+            <field name="name">employee.department.select</field>
+            <field name="model">employee.department</field>
+            <field name="arch" type="xml">
+                <search string="Employee Department">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="employee_department_tree" model="ir.ui.view">
+            <field name="name">employee.department.tree</field>
+            <field name="model">employee.department</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Employee Department">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="employee_department_action" model="ir.actions.act_window">
+            <field name="name">Employee Department</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.department</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.employee_department_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.employee_department_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.employee_department_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+        <!--Leave Policy View-->
+        <record id="leave_policy_form" model="ir.ui.view">
+            <field name="name">employee.leave.policy.form</field>
+            <field name="model">employee.leave.policy</field>
+            <field name="arch" type="xml">
+                <form string="Leave Policy">
+                    <sheet>
+                        <group col="4">
+                            <field name="search_key"/>
+                            <field name="name"/>
+                            <field name="valid_from"/>
+                            <field name="leave_allocation"/>
+                            <field name="is_probation"/>
+                        </group>
+                        <footer>
+                            <separator string="Audit" style="color: green;" col="6"/>
+                            <hr style="color: green;"/>
+                            <group col="8">
+                                <field name="create_date" string="Creation Date"/>
+                                <field name="create_uid" string="Created By"/>
+                                <field name="write_date" string="Updated"/>
+                                <field name="write_uid" string="Updated By"/>
+                            </group>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="leave_policy_filter" model="ir.ui.view">
+            <field name="name">employee.leave.policy.select</field>
+            <field name="model">employee.leave.policy</field>
+            <field name="arch" type="xml">
+                <search string="Leave Policy">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="valid_from"/>
+                    <field name="leave_allocation"/>
+                    <field name="is_probation"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="leave_policy_tree" model="ir.ui.view">
+            <field name="name">employee.leave.policy.tree</field>
+            <field name="model">employee.leave.policy</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <tree string="Leave Policy">
+                    <field name="search_key"/>
+                    <field name="name"/>
+                    <field name="valid_from"/>
+                    <field name="leave_allocation"/>
+                    <field name="is_probation"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="leave_policy_action" model="ir.actions.act_window">
+            <field name="name">Leave Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.leave.policy</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+            <field name="search_view_id" ref="esmech_timesheet.leave_policy_filter"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.leave_policy_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.leave_policy_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new product variant
+                </p>
+                <p>
+                    You must define a product for everything you sell or purchase,
+                    whether it's a storable product, a consumable or a service.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="job_data_menu" name="Job Details" parent="esmech_timesheet.menu_timesheet_config"
+                  action="esmech_job_data_action" sequence="2"/>
+        <menuitem id="payment_menu" name="Payment Method" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="payment_method_action" sequence="3"/>
+        <menuitem id="weekends_menu" name="Define Weekends" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="weekly_off_action" sequence="4"/>
+        <menuitem id="workshift_menu" name="Work Shift" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="work_shift_action" sequence="5"/>
+        <menuitem id="designation_menu" name="Designation/Position" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="designation_action" sequence="6"/>
+        <menuitem id="team_menu" name="Team" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="team_action" sequence="7"/>
+        <menuitem id="paygrade_menu" name="Pay Grade" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="paygrade_action" sequence="8"/>
+        <menuitem id="employee_category_menu" name="Employee Category" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="employee_category_action" sequence="9"/>
+        <menuitem id="employee_department_menu" name="Employee Department"
+                  parent="esmech_timesheet.menu_timesheet_personal"
+                  action="employee_department_action" sequence="9"/>
+        <menuitem id="leave_policy_menu" name="Leave Policy" parent="esmech_timesheet.menu_timesheet_personal"
+                  action="leave_policy_action" sequence="9"/>
 
 
     </data>

@@ -4,59 +4,6 @@ from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 
-# Employee Experience section
-class EmployeeExperience(models.Model):
-    """ Model for Child Work Experience Information """
-
-    _name = 'employee.experience'
-    _description = 'Employee Work Experience Information'
-
-    employee_records_id = fields.Many2one('hr.employee')
-    employee_name = fields.Char("Employee", readonly=True)
-    prev_employer = fields.Char("Previous Employer", required=True)
-    designation = fields.Char("Designation")
-    date_of_join = fields.Date("Date of Join")
-    salary = fields.Char("Salary")
-    relieved_date = fields.Date("Relieved Date")
-    reason_for_relieving = fields.Char("Reason for Relieving")
-    is_active = fields.Boolean("Active")
-
-
-# Qualification Experience section
-class EmployeeQualification(models.Model):
-    """ Model for Child Educational qualification """
-
-    _name = 'employee.qualification'
-    _description = 'Employee Educational qualification'
-
-    employee_records_id = fields.Many2one('hr.employee')
-    employee_name = fields.Char("Employee", readonly=True)
-    degree = fields.Char("Degree", required=True)
-    specialisation = fields.Char("Specialisation")
-    institute = fields.Char("Institute")
-    university = fields.Char("University")
-    year_of_pass = fields.Char("Year of Passing")
-    percentage = fields.Char("Percentage")
-    is_active = fields.Boolean("Active")
-
-
-# Bank info section
-class EmployeeBankInfo(models.Model):
-    """ Model for Child Educational qualification """
-
-    _name = 'employee.bankinfo'
-    _description = 'Employee Bank Account Details'
-
-    employee_records_id = fields.Many2one('hr.employee')
-    employee_name = fields.Char("Employee", readonly=True)
-    account_no = fields.Char("Account No.", required=True)
-    account_name = fields.Char("Account Name", required=True)
-    bank_name = fields.Char("Bank Name", required=True)
-    branch_name = fields.Char("Branch Name", readonly=True)
-    description = fields.Char("Description", readonly=True)
-    default = fields.Char("Default")
-
-
 # Leave Info section
 class EmployeeLeaveInfo(models.Model):
     """ Model for Child Leave Information """
