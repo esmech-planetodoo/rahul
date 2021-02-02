@@ -9,7 +9,7 @@ class PersonalInformationData(models.Model):
     _description = 'Personal Information Data'
     _order = 'employee_name'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee")
     father_name = fields.Char("Father Name")
     mother_name = fields.Char("Mother Name")
@@ -52,7 +52,7 @@ class EmployeeLocation(models.Model):
     _name = 'employee.location'
     _description = 'Employee residential details'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee")
     company_id = fields.Many2one(
         'res.company', string='Company', change_default=True,
@@ -83,7 +83,7 @@ class EmployeeQualification(models.Model):
     _name = 'employee.qualification'
     _description = 'Employee Educational qualification'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee", readonly=True)
     degree = fields.Char("Degree", required=True)
     specialisation = fields.Char("Specialisation")
@@ -101,7 +101,7 @@ class EmployeeBankInfo(models.Model):
     _name = 'employee.bankinfo'
     _description = 'Employee Bank Account Details'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee", readonly=True)
     account_no = fields.Char("Account No.", required=True)
     account_name = fields.Char("Account Name", required=True)

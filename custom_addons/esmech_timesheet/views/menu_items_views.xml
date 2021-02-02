@@ -16,8 +16,6 @@
     <menuitem id="menu_timesheet_config" name="Configuration" parent="menu_timesheet_title"  sequence="30" />
     <menuitem id="menu_timesheet_personal" name="Personal Data" parent="menu_timesheet_config"  sequence="20" />
 
-      <!--   Sub Menu Employees Setup-->
-    <menuitem id="menu_timesheet_employee"  name="Employees" parent="menu_timesheet_employees" action="esmech_timesheet.timesheet_employee_action"   sequence="1" />
 
     <!--   Sub Menu Time Management Setup-->
     <menuitem id="menu_timesheet_punch" name="Punch In/Out" parent="menu_timesheet_timemanagement" action="timesheet_punch_action"  sequence="1"  />

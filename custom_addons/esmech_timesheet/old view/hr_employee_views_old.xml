@@ -1,0 +1,369 @@
+<odoo>
+
+    <record id="timesheet_employee_form" model="ir.ui.view">
+        <field name="name">timesheet.employee.form</field>
+        <field name="model">hr.employee.master</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1[hasclass('d-flex')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- name is hidden  -->
+            <field name="name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <!-- full name tag  -->
+            <xpath expr="//widget[@name='web_ribbon']" position="before">
+                <group col="6">
+                    <h1 class="d-flex">
+                        <field name="full_name" placeholder="Full Name"/>
+                    </h1>
+                </group>
+                <!--                <group>-->
+                <!--                    <field name="first_name" />-->
+                <!--                    <field name="middle_name" />-->
+                <!--                    <field name="last_name"/>-->
+                <!--                </group>-->
+            </xpath>
+
+            <!-- first second and last name  -->
+            <xpath expr="//sheet/div[hasclass('oe_title')]/h2" position="before">
+                <group class="oe_edit_only">
+                    <field name="first_name"/>
+                    <field name="middle_name"/>
+                    <field name="last_name"/>
+                </group>
+            </xpath>
+            <!--           -->
+
+            <!--  main page fields  -->
+            <!--  Odoo default fields hidden  -->
+            <xpath expr="//sheet/group[2]" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//sheet/div[hasclass('oe_title')]" position="after">
+                <group col='4'>
+                    <field name="organization"/>
+                    <field name="employee_roll_no"/>
+                    <field name="card_no"/>
+                    <field name="email"/>
+                    <field name="alter_email"/>
+                    <field name="work_phone"/>
+                    <field name="mobile_phone"/>
+                    <field name="alter_phone"/>
+                    <field name="description"/>
+                    <field name="rotation"/>
+                    <field name="business_partner"/>
+                    <field name="user_contact"/>
+                </group>
+                <group col='4'>
+                    <field name="is_active"/>
+                    <field name="shift"/>
+                </group>
+            </xpath>
+            <xpath expr="//sheet/notebook" position="before">
+                <div>
+                    <h1 style="color: green;">Audit</h1>
+<!--                    <separator style="color: green;" col="6"/>-->
+                    <hr style="color: green;"/>
+                    <group col="8">
+                        <field name="create_date" string="Creation Date"/>
+                        <field name="create_uid" string="Created By"/>
+                        <field name="write_date" string="Updated"/>
+                        <field name="write_uid" string="Updated By"/>
+                    </group>
+                </div>
+                <div>
+                    <h1>Notes</h1>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </div>
+                <div>
+                    <h1>Linked Items</h1>
+                    <group>
+
+                    </group>
+                </div>
+
+            </xpath>
+            <!--Personal information Section-->
+
+            <!--            <page name="personal_information" position="attributes">-->
+            <!--                <attribute name="string">Personal Information</attribute>-->
+            <!--            </page>-->
+
+            <!-- New Page Personal Information -->
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Personal information">
+                    <field name="personalinfo_data_ids">
+                        <tree>
+                            <field name="employee_name"/>
+                            <field name="father_name"/>
+                            <field name="mother_name"/>
+                            <field name="nick_name"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="father_name"/>
+                                    <field name="mother_name"/>
+                                    <field name="spouse_name"/>
+                                    <field name="nick_name"/>
+                                    <field name="gender"/>
+                                    <field name="marital"/>
+                                    <field name="birthday"/>
+                                    <field name="age"/>
+                                    <field name="place_birth"/>
+                                    <field name="blood_group"/>
+                                    <field name="religion"/>
+                                    <field name="dependent_no"/>
+                                    <field name="country_id"/>
+                                    <field name="ethnic_race"/>
+                                    <field name="is_active"/>
+                                </group>
+                                <h2>Additional Information</h2>
+                                <group col="4">
+                                    <field name="pf_no"/>
+                                    <field name="driving_lic"/>
+                                    <field name="dl_issue_date"/>
+                                    <field name="dl_expiry_date"/>
+                                    <field name="pan_no"/>
+                                    <field name="passport_no"/>
+                                    <field name="passport_issue_date"/>
+                                    <field name="passport_expiry_date"/>
+                                    <field name="esi_no"/>
+                                    <field name="uid_no"/>
+                                    <field name="is_active"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Location/Address">
+                    <field name="employee_location_ids">
+                        <tree>
+                            <field name="employee_records_id"/>
+                            <field name="employee_name"/>
+                            <field name="address_id" context="{'show_address': 1}"
+                                   options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>
+                            <field name="present_address"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="address_id" context="{'show_address': 1}"
+                                           options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>
+                                    <field name="present_address"/>
+                                    <field name="permanent_address"/>
+                                    <field name="default"/>
+                                    <field name="is_active"/>
+                                    <field name="location_type"/>
+                                </group>
+
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Job">
+                    <field name="employee_job_ids">
+                        <tree>
+                            <field name="employee_name"/>
+                            <field name="payment_method_id"/>
+                            <field name="financial_acc"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="financial_acc"/>
+                                    <field name="weekly_off_id"/>
+                                    <field name="work_shift_id"/>
+                                    <field name="designation_id"/>
+                                    <field name="team_id"/>
+                                    <field name="pay_grade_id"/>
+                                    <field name="emp_category_id"/>
+                                    <field name="emp_department_id"/>
+                                    <field name="date_joining"/>
+                                    <field name="years_service"/>
+                                    <field name="probation_period"/>
+                                    <field name="confirmation_date"/>
+                                    <field name="retirement_date"/>
+                                    <field name="relieved_date"/>
+                                    <field name="reason_leaving"/>
+                                    <field name="leave_policy_id"/>
+                                    <field name="is_active"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Experience">
+                    <field name="employee_experience_ids">
+                        <tree>
+                            <field name="employee_name"/>
+                            <field name="prev_employer"/>
+                            <field name="designation"/>
+                            <field name="date_of_join"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="prev_employer"/>
+                                    <field name="designation"/>
+                                    <field name="date_of_join"/>
+                                    <field name="salary"/>
+                                    <field name="relieved_date"/>
+                                    <field name="reason_for_relieving"/>
+                                    <field name="is_active"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Qualification">
+                    <field name="qualification_ids">
+                        <tree>
+                            <field name="employee_name"/>
+                            <field name="degree"/>
+                            <field name="specialisation"/>
+                            <field name="institute"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="degree"/>
+                                    <field name="specialisation"/>
+                                    <field name="institute"/>
+                                    <field name="university"/>
+                                    <field name="year_of_pass"/>
+                                    <field name="percentage"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Bank information">
+                    <field name="bankinfo_ids">
+                        <tree>
+                            <field name="employee_name"/>
+                            <field name="account_no"/>
+                            <field name="account_name"/>
+                            <field name="bank_name"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="account_no"/>
+                                    <field name="account_name"/>
+                                    <field name="bank_name"/>
+                                    <field name="branch_name"/>
+                                    <field name="description"/>
+                                    <field name="default"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Leave Information">
+                    <field name="leaveinfo_ids">
+                        <tree>
+                            <field name="employee_records_id"/>
+                            <field name="employee_name"/>
+                            <field name="leave_type"/>
+                            <field name="available_leaves"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="employee_name"/>
+                                    <field name="leave_type"/>
+                                    <field name="available_leaves"/>
+                                    <field name="encashed_leaves"/>
+                                    <field name="leaves_taken"/>
+                                    <field name="accured"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <!-- Leave details kept hidden as it was not available on open bravo-->
+                <page string="Leave Details" invisible="1">
+                    <field name="employeeleave_ids">
+                        <tree>
+                            <field name="leave"/>
+                            <field name="reason"/>
+                            <field name="leave_requisition"/>
+                            <field name="employee_punch"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="leave"/>
+                                    <field name="reason"/>
+                                    <field name="leave_requisition"/>
+                                    <field name="employee_punch"/>
+                                    <field name="leave_status"/>
+                                    <field name="accured_on"/>
+                                    <field name="valid_till"/>
+                                    <field name="avail_leaves"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Shift Information">
+                    <field name="employeeshift_ids">
+                        <tree>
+                            <field name="employee_records_id"/>
+                            <field name="shift_schedule"/>
+                            <field name="start_day"/>
+                            <field name="end_day"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group col="4">
+                                    <field name="shift_schedule"/>
+                                    <field name="start_day"/>
+                                    <field name="end_day"/>
+                                    <field name="rotation"/>
+                                    <field name="employee_name"/>
+                                    <field name="description"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//sheet/notebook/page[@name='public']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='personal_information']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='hr_settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Employees : actions -->
+    <record id="timesheet_employee_action" model="ir.actions.act_window">
+        <field name="name">Employee</field>
+        <field name="res_model">hr.employee.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add Member with punch details
+            </p>
+        </field>
+    </record>
+</odoo>

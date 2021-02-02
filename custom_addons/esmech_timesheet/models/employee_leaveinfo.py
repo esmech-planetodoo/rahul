@@ -11,7 +11,7 @@ class EmployeeLeaveInfo(models.Model):
     _name = 'employee.leaveinfo'
     _description = 'Employee Leave Information'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee", required=True)
     leave_type = fields.Char("Leave Type", required=True)
     available_leaves = fields.Char("Available Leaves", required=True)
@@ -27,7 +27,7 @@ class EmployeeLeaveDetails(models.Model):
     _name = 'employee.leave.details'
     _description = 'Employee Leave Details'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     leave = fields.Char("Leave Date")
     reason = fields.Char("Reason")
     leave_requisition = fields.Char("Leave Requisition")
@@ -44,10 +44,11 @@ class EmployeeShift(models.Model):
     _name = 'employee.shift'
     _description = 'Employee Shift Details'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     shift_schedule = fields.Char("Shift schedule")
     start_day = fields.Char("Start day")
     end_day = fields.Char("End day")
     rotation = fields.Char("Shift Rotation", required=True)
     employee_name = fields.Char("Employee", readonly=True)
     description = fields.Char("Description")
+

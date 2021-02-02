@@ -9,7 +9,7 @@ class EmployeeJob(models.Model):
     _name = 'employee.job'
     _description = 'Employee work details'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     payment_method_id = fields.Many2one('employee.payment.method', "Payment Method")
     employee_name = fields.Char("Employee")
     financial_acc = fields.Char("Financial Account")
@@ -151,7 +151,7 @@ class EmployeeExperience(models.Model):
     _name = 'employee.experience'
     _description = 'Employee Work Experience Information'
 
-    employee_records_id = fields.Many2one('hr.employee')
+    employee_records_id = fields.Many2one('hr.employee.master')
     employee_name = fields.Char("Employee", readonly=True)
     prev_employer = fields.Char("Previous Employer", required=True)
     designation = fields.Char("Designation")

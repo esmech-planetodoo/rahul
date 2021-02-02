@@ -10,7 +10,7 @@ class PunchDetails(models.Model):
     attendence_ids = fields.One2many('attendance.details', 'punch_id', "attendance id")
     organization = fields.Char("Organization")
     employee_id = fields.Char("Employee ID")
-    employee = fields.Char("Employee")
+    employee = fields.Many2one("hr.employee.master", "Employee")
     punch_date = fields.Date("Punch Date")
     punch_in_time = fields.Float("Punch In Time (HH:MM:SS)")
     punch_out_time = fields.Float("Punch Out Time (HH:MM:SS)")

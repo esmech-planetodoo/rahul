@@ -7,9 +7,15 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMA
 class EmployeeRecord(models.Model):
     """ Employee records """
 
-    _name = 'hr.employee'
-    _inherit = 'hr.employee'
+    _name = 'hr.employee.master'
+    _inherit = ['hr.employee', 'image.mixin']
     _description = 'Employee Details'
+    _rec_name = 'full_name'
+
+    @api.model
+    def _default_image(self):
+        image_path = get_module_resource('hr', 'static/src/img', 'default_image.png')
+        return base64.b64encode(open(image_path, 'rb').read())
 
     personalinfo_data_ids = fields.One2many('employee.info.data', 'employee_records_id', string='Personal information')
     employee_location_ids = fields.One2many('employee.location', 'employee_records_id', string='Location Information')
@@ -34,7 +40,6 @@ class EmployeeRecord(models.Model):
     mobile_phone = fields.Char("Mobile No.")
     alter_phone = fields.Char("Alternate Phone No.")
     emergency_contact = fields.Char("Emergency Contact No.")
-    image = fields.Binary("Image")
     description = fields.Char("Description")
     is_active = fields.Boolean("Active")
     shift = fields.Boolean("Shift")
@@ -46,6 +51,7 @@ class EmployeeRecord(models.Model):
     business_partner = fields.Char("Business Partner")
     user_contact = fields.Char("User/Contact")
     add_data = fields.Char("ADD Data")
+    image_1920 = fields.Image(default=_default_image)
 
     creation_date = fields.Char("Creation Date")
     created_by = fields.Char("Created By")
@@ -53,6 +59,12 @@ class EmployeeRecord(models.Model):
     updated_by = fields.Char("Updated By")
 
     notes = fields.Text("Notes")
+    #category field to remove delegation
+    # category_ids = fields.Many2many(
+    #     'hr.employee.category', 'employee_category_rel',
+    #     'emp_id', 'category_id', groups="hr.group_hr_manager",
+    #     string='Tags')
+
 
     @api.depends('first_name', 'middle_name', 'last_name')
     def _full_name(self):
@@ -60,3 +72,10 @@ class EmployeeRecord(models.Model):
             record.full_name = (record.first_name or '') + ' ' + (record.middle_name or '') + ' ' + (
                     record.last_name or '')
 
+    class EmployeeRecord(models.Model):
+        """ Employee records """
+
+        _name = 'hr.employee.category'
+
+        employee_ids = fields.Many2many('hr.employee.master', 'employee_category_rel', 'category_id', 'emp_id',
+                                        string='Employees')
