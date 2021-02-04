@@ -11,6 +11,8 @@
     <!--   Sub Menu Timesheet-->
     <menuitem id="menu_timesheet_timemanagement" name="Time Management" parent="menu_timesheet_title" sequence="1" />
     <menuitem id="menu_timesheet_employees" name="Employees" parent="menu_timesheet_title" sequence="2" />
+    <menuitem id="menu_timesheet_transaction" name="Transaction" parent="menu_timesheet_title" sequence="3" />
+
 
     <!--   Sub Menu Configuration Setup-->
     <menuitem id="menu_timesheet_config" name="Configuration" parent="menu_timesheet_title"  sequence="30" />

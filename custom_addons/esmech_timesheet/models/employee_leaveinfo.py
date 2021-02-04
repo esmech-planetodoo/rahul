@@ -52,3 +52,49 @@ class EmployeeShift(models.Model):
     employee_name = fields.Char("Employee", readonly=True)
     description = fields.Char("Description")
 
+
+class AttendanceStatus(models.Model):
+    _name = 'attendance.status'
+    _description = 'Employee attendance status in public conference and checking employees daily company attendance.'
+    _rec_name = 'name'
+
+    name = fields.Char("Name")
+    is_weekend = fields.Boolean("Weekend")
+    is_default = fields.Boolean("Absent")
+    is_present = fields.Boolean("Present")
+    is_compoff = fields.Boolean("Comp Off")
+    is_holiday = fields.Boolean("Holiday")
+    is_leave = fields.Boolean("Leave")
+    is_lop = fields.Boolean("LOP")
+    is_ot = fields.Boolean("OT")
+    is_halfday = fields.Boolean("Half Day")
+    maternity = fields.Char("Maternity")
+    description = fields.Char("Description")
+    is_ontour = fields.Boolean("On Tour")
+    is_wow = fields.Boolean("Worked On Weekend")
+    is_short = fields.Boolean("Short Leave")
+    is_active = fields.Boolean("Active")
+
+
+class LeaveType(models.Model):
+    _name = 'leave.type'
+    _description = 'Different reasons for staying away from the work place, like sick leave, casual leave etc.,'
+    _rec_name = 'name'
+
+    is_encashable = fields.Boolean("Encashable")
+    leave_category = fields.Selection([
+        ('comp_off', 'Comp Off'),
+        ('paid_leave', 'Paid Leave'),
+        ('short_leave', 'Short Leave'),
+        ('unpaid_leave', 'Unpaid Leave'),
+    ], string="Leave Category")
+    #    description = fields.Boolean("Description")
+    name = fields.Char("Name")
+    is_earned = fields.Boolean("Earned")
+    is_autocredit = fields.Boolean("Auto Credit")
+    org_id = fields.Boolean("Organization")
+    maternity_leave_id = fields.Boolean("Maternity Leave")
+    is_active = fields.Boolean("Active")
+    maternity = fields.Boolean("Maternity")
+    leave_laps_days = fields.Char("Leave Lapse After (Days)")
+    is_esi = fields.Boolean("ESI")

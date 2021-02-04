@@ -1,0 +1,224 @@
+<odoo>
+    <!--Attendance Status View-->
+    <record id="attendance_status_form" model="ir.ui.view">
+        <field name="name">attendance.status.form</field>
+        <field name="model">attendance.status</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Status">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="is_weekend"/>
+                        <field name="is_default"/>
+                        <field name="is_present"/>
+                        <field name="is_compoff"/>
+                        <field name="is_holiday"/>
+                        <field name="is_leave"/>
+                        <field name="is_lop"/>
+                        <field name="is_ot"/>
+                        <field name="is_halfday"/>
+                        <field name="maternity"/>
+                        <field name="description"/>
+                        <field name="is_ontour"/>
+                        <field name="is_wow"/>
+                        <field name="is_short"/>
+                        <field name="is_active"/>
+                    </group>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="attendance_status_filter" model="ir.ui.view">
+        <field name="name">attendance.status.select</field>
+        <field name="model">attendance.status</field>
+        <field name="arch" type="xml">
+            <search string="Attendance Status">
+                <field name="name"/>
+                <field name="is_weekend"/>
+                <field name="is_default"/>
+                <field name="is_present"/>
+                <field name="is_compoff"/>
+                <field name="is_holiday"/>
+                <field name="is_leave"/>
+                <field name="is_lop"/>
+                <field name="is_ot"/>
+                <field name="is_halfday"/>
+                <field name="maternity"/>
+                <field name="description"/>
+                <field name="is_ontour"/>
+                <field name="is_wow"/>
+                <field name="is_short"/>
+                <field name="is_active"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="attendance_status_tree" model="ir.ui.view">
+        <field name="name">attendance.status.tree</field>
+        <field name="model">attendance.status</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Attendance Status">
+                <field name="name"/>
+                <field name="is_weekend"/>
+                <field name="is_default"/>
+                <field name="is_present"/>
+                <field name="is_compoff"/>
+                <field name="is_holiday"/>
+                <field name="is_leave"/>
+                <field name="is_lop"/>
+                <field name="is_ot"/>
+                <field name="is_halfday"/>
+                <field name="maternity"/>
+                <field name="description"/>
+                <field name="is_ontour"/>
+                <field name="is_wow"/>
+                <field name="is_short"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="attendance_status_action" model="ir.actions.act_window">
+        <field name="name">Attendance Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">attendance.status</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.attendance_status_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.attendance_status_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.attendance_status_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+
+    <!--Leave Type View-->
+    <record id="leave_type_form" model="ir.ui.view">
+        <field name="name">leave.type.form</field>
+        <field name="model">leave.type</field>
+        <field name="arch" type="xml">
+            <form string="Leave Type">
+                <sheet>
+                    <group col="4">
+                        <field name="is_encashable"/>
+                        <field name="leave_category"/>
+                        <field name="name"/>
+                        <field name="is_earned"/>
+                        <field name="is_autocredit"/>
+                        <field name="org_id"/>
+                        <field name="maternity"/>
+                        <field name="leave_laps_days"/>
+                        <field name="is_esi"/>
+                        <field name="is_active"/>
+
+                    </group>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="leave_type_filter" model="ir.ui.view">
+        <field name="name">leave.type.select</field>
+        <field name="model">leave.type</field>
+        <field name="arch" type="xml">
+            <search string="Leave Type">
+                <field name="is_encashable"/>
+                <field name="leave_category"/>
+                <field name="name"/>
+                <field name="is_earned"/>
+                <field name="is_autocredit"/>
+                <field name="org_id"/>
+                <field name="maternity"/>
+                <field name="leave_laps_days"/>
+                <field name="is_esi"/>
+                <field name="is_active"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="leave_type_tree" model="ir.ui.view">
+        <field name="name">leave.type.tree</field>
+        <field name="model">leave.type</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Leave Type">
+                <field name="is_encashable"/>
+                <field name="leave_category"/>
+                <field name="name"/>
+                <field name="is_earned"/>
+                <field name="is_autocredit"/>
+                <field name="org_id"/>
+                <field name="maternity"/>
+                <field name="leave_laps_days"/>
+                <field name="is_esi"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="leave_type_action" model="ir.actions.act_window">
+        <field name="name">Leave Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leave.type</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.leave_type_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.leave_type_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.leave_type_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="attendance_status_menu" name="Attendance Status" parent="esmech_timesheet.menu_timesheet_personal"
+              action="attendance_status_action" sequence="15"/>
+    <menuitem id="leave_type_menu" name="Leave Type" parent="esmech_timesheet.menu_timesheet_personal"
+              action="leave_type_action" sequence="16"/>
+</odoo>

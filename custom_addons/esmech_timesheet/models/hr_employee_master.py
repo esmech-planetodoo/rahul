@@ -1,14 +1,13 @@
-from odoo import api, fields, models, SUPERUSER_ID, _
-from odoo.addons.test_impex.tests.test_load import test_required_string_field
-from odoo.exceptions import UserError
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, models, _
+from odoo.modules import get_module_resource
+import base64
 
 
 class EmployeeRecord(models.Model):
     """ Employee records """
 
     _name = 'hr.employee.master'
-    _inherit = ['hr.employee', 'image.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Employee Details'
     _rec_name = 'full_name'
 
@@ -24,7 +23,8 @@ class EmployeeRecord(models.Model):
     qualification_ids = fields.One2many('employee.qualification', 'employee_records_id', string='Qualification')
     bankinfo_ids = fields.One2many('employee.bankinfo', 'employee_records_id', string='Bank Information')
     leaveinfo_ids = fields.One2many('employee.leaveinfo', 'employee_records_id', string='Leave Information')
-    employeeleave_ids = fields.One2many('employee.leave.details', 'employee_records_id', string='Employee Leave details')
+    employeeleave_ids = fields.One2many('employee.leave.details', 'employee_records_id',
+                                        string='Employee Leave details')
     employeeshift_ids = fields.One2many('employee.shift', 'employee_records_id', string='Employee Shift details')
     name = fields.Char("Name", related="full_name")
     first_name = fields.Char("First Name")
@@ -59,23 +59,9 @@ class EmployeeRecord(models.Model):
     updated_by = fields.Char("Updated By")
 
     notes = fields.Text("Notes")
-    #category field to remove delegation
-    # category_ids = fields.Many2many(
-    #     'hr.employee.category', 'employee_category_rel',
-    #     'emp_id', 'category_id', groups="hr.group_hr_manager",
-    #     string='Tags')
-
 
     @api.depends('first_name', 'middle_name', 'last_name')
     def _full_name(self):
         for record in self:
             record.full_name = (record.first_name or '') + ' ' + (record.middle_name or '') + ' ' + (
                     record.last_name or '')
-
-    class EmployeeRecord(models.Model):
-        """ Employee records """
-
-        _name = 'hr.employee.category'
-
-        employee_ids = fields.Many2many('hr.employee.master', 'employee_category_rel', 'category_id', 'emp_id',
-                                        string='Employees')

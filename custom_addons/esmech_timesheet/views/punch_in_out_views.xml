@@ -14,8 +14,8 @@
                             </group>
                             <group col="6">
                                 <field name="punch_date"/>
-                                <field name="punch_in_time" widget="timepicker"/>
-                                <field name="punch_out_time" widget="timepicker"/>
+                                <field name="punch_in_time" widget="float_time"/>
+                                <field name="punch_out_time" widget="float_time"/>
                                 <field name="shift_hours"/>
                                 <field name="hours_worked"/>
                             </group>

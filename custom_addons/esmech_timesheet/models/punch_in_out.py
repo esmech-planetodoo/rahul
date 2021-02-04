@@ -18,30 +18,32 @@ class PunchDetails(models.Model):
     hours_worked = fields.Float("Hours Worked (HH:MM:SS)")
     reason = fields.Text("Reason")
     manual = fields.Boolean("Manual")
-    attendance_status = fields.Selection([
-        ('Absent', "Absent"),
-        ('Comp off', "Comp off"),
-        ('Half day', "Half day"),
-        ('Holiday', "Holiday"),
-        ('Leave', "Leave"),
-        ('Loss of pay', "Loss of pay"),
-        ('Maternity leave', "Maternity leave"),
-        ('On tour', "On tour"),
-        ('Overtime hour', "Overtime hour"),
-        ('Present', "Present"),
-        ('Weekend', "Weekend"),
-        ('Worked On Weekend', "Worked On Weekend"),
-    ], string="Attendance Status")
+    attendance_status = fields.Many2one('attendance.status', 'Attendance Status')
+    # attendance_status = fields.Selection([
+    #     ('Absent', "Absent"),
+    #     ('Comp off', "Comp off"),
+    #     ('Half day', "Half day"),
+    #     ('Holiday', "Holiday"),
+    #     ('Leave', "Leave"),
+    #     ('Loss of pay', "Loss of pay"),
+    #     ('Maternity leave', "Maternity leave"),
+    #     ('On tour', "On tour"),
+    #     ('Overtime hour', "Overtime hour"),
+    #     ('Present', "Present"),
+    #     ('Weekend', "Weekend"),
+    #     ('Worked On Weekend', "Worked On Weekend"),
+    # ], string="Attendance Status")
 
-    leave_type = fields.Selection([
-        ('Casual Leave', "Casual Leave"),
-        ('Comp off', "Comp off"),
-        ('Leave without pay', "Leave without pay"),
-        ('Other leave', "Other leave"),
-        ('Priviledged leave', "Priviledged leave"),
-        ('short leave', "short leave"),
-        ('sick leave', "sick leave"),
-    ], string="Leave Type")
+    leave_type = fields.Many2one('leave.type', 'Leave Type')
+    # leave_type = fields.Selection([
+    #     ('Casual Leave', "Casual Leave"),
+    #     ('Comp off', "Comp off"),
+    #     ('Leave without pay', "Leave without pay"),
+    #     ('Other leave', "Other leave"),
+    #     ('Priviledged leave', "Priviledged leave"),
+    #     ('short leave', "short leave"),
+    #     ('sick leave', "sick leave"),
+    # ], string="Leave Type")
 
     leave_status = fields.Selection([
         ('Approved', "Approved"),
