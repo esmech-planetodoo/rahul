@@ -22,3 +22,10 @@ access_employee_leave_details,access.employee.leave.details,esmech_timesheet.mod
 access_employee_shift,access.employee.shift,esmech_timesheet.model_employee_shift,base.group_user,1,1,1,1
 access_attendance_status,access.attendance.status,esmech_timesheet.model_attendance_status,base.group_user,1,1,1,1
 access_leave_type,access.leave.type,esmech_timesheet.model_leave_type,base.group_user,1,1,1,1
+
+
+access_employee_project,access.employee.project,esmech_timesheet.model_employee_project,base.group_user,1,1,1,1
+access_project_task_master,access.project.task.master,esmech_timesheet.model_project_task_master,base.group_user,1,1,1,1
+access_project_sub_task,access.project.sub.task,esmech_timesheet.model_project_sub_task,base.group_user,1,1,1,1
+access_project_employee_task,access.project.employee.task,esmech_timesheet.model_project_employee_task,base.group_user,1,1,1,1
+access_project_yearwise_spend,access.project.yearwise.spend,esmech_timesheet.model_project_yearwise_spend,base.group_user,1,1,1,1

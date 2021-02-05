@@ -1,0 +1,153 @@
+<odoo>
+    <!--Leave Type View-->
+    <record id="employee_project_form" model="ir.ui.view">
+        <field name="name">employee.project.form</field>
+        <field name="model">employee.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <sheet>
+                    <group col="4">
+                        <field name="project_id"/>
+                        <field name="customer_ref"/>
+                        <field name="description"/>
+                        <field name="division"/>
+                        <field name="drawing_no"/>
+                        <field name="search_key"/>
+                    </group>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                    <notebook>
+                        <page string="Task Master">
+                            <field name="task_master_ids">
+                                <tree>
+                                    <field name="line"/>
+                                    <field name="project_id"/>
+                                    <field name="task_name"/>
+                                    <field name="drawing_no"/>
+                                    <field name="master_product"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="4">
+                                            <field name="line"/>
+                                            <field name="project_id"/>
+                                            <field name="task_name"/>
+                                            <field name="drawing_no"/>
+                                            <field name="master_product"/>
+                                            <field name="assembly"/>
+                                            <field name="billing_type"/>
+                                            <field name="estimatehours_design"/>
+                                            <field name="startdate_design"/>
+                                            <field name="actualdeadline_dsgn"/>
+                                            <field name="spenttime_design"/>
+                                            <field name="variation_design"/>
+                                            <field name="lasttrackingdate_design"/>
+                                            <field name="estimatehours_assembly"/>
+                                            <field name="deadline_assembly"/>
+                                            <field name="spenttime_assembly"/>
+                                            <field name="variation_assembly"/>
+                                            <field name="estimate_hours"/>
+                                            <field name="deadline"/>
+                                            <field name="spent_time"/>
+                                            <field name="variation"/>
+                                        </group>
+                                        <notebook>
+                                            <page string="Design Sub Task">
+
+                                                <!--Todo: Create notebook inside notebook-->
+<!--                                                Can be created by creating seperate view for notebook-->
+<!--                                                <field name="sub_task_ids">-->
+<!--                                                    <tree>-->
+<!--                                                        <field name="employee_proj_ids"/>-->
+<!--                                                        <field name="is_active"/>-->
+<!--                                                        <field name="project_id"/>-->
+<!--                                                        <field name="task_name"/>-->
+<!--                                                        <field name="spent_time"/>-->
+<!--                                                        <field name="master_product"/>-->
+<!--                                                        <field name="assembly"/>-->
+<!--&lt;!&ndash;                                                        <field name="line"/>&ndash;&gt;-->
+<!--                                                        <field name="drawing_no"/>-->
+<!--                                                        <field name="estimatehours_design"/>-->
+<!--                                                        <field name="variation_design"/>-->
+<!--                                                    </tree>-->
+<!--                                                </field>-->
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="employee_project_filter" model="ir.ui.view">
+        <field name="name">employee.project.select</field>
+        <field name="model">employee.project</field>
+        <field name="arch" type="xml">
+            <search string="Project">
+                <field name="project_id"/>
+                <field name="customer_ref"/>
+                <field name="description"/>
+                <field name="division"/>
+                <field name="drawing_no"/>
+                <field name="search_key"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="employee_project_tree" model="ir.ui.view">
+        <field name="name">employee.project.tree</field>
+        <field name="model">employee.project</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Project">
+                <field name="project_id"/>
+                <field name="customer_ref"/>
+                <field name="description"/>
+                <field name="division"/>
+                <field name="drawing_no"/>
+                <field name="search_key"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="employee_project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.project</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.employee_project_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.employee_project_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.employee_project_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_employee_project" name="Project" parent="menu_project_root" action="employee_project_action"
+              sequence="4"/>
+
+</odoo>
