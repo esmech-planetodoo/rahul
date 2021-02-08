@@ -10,7 +10,7 @@ class EmployeeProject(models.Model):
     _rec_name = 'project_id'
 
     task_master_ids = fields.One2many('project.task.master', 'employee_proj_ids', "Task Master")
-    sub_task_ids = fields.One2many('project.sub.task', 'employee_proj_ids', "Sub Task")
+    year_wise_ids = fields.One2many('project.yearwise.spend', 'employee_proj_ids', "Task Master")
     project_id = fields.Char("Project No")
     customer_ref = fields.Char("Customer")
     description = fields.Char("Description")
@@ -21,11 +21,11 @@ class EmployeeProject(models.Model):
     #Don't know usage of below fields
     #Below Fields are buttons
     # projectstatus = fields.Text("Project Status")
-    # em_esmts_import = fields.Text("Import Tasks")
-    # allocatealert = fields.Text("Generate Task Alert")
-    # synchronise = fields.Text("Synch ")
-    # copytask = fields.Text("Copy Task")
-    # customer = fields.Text("Create SubTask")
+    import_task = fields.Text("Import Tasks")
+    task_alert = fields.Text("Generate Task Alert")
+    synchronise = fields.Text("Synch ")
+    copy_task = fields.Text("Copy Task")
+    create_subtask = fields.Text("Create SubTask")
 
 
 class TaskMaster(models.Model):
@@ -33,6 +33,7 @@ class TaskMaster(models.Model):
     _description = 'Task Master'
 
     employee_proj_ids = fields.Many2one('employee.project')
+    sub_task_ids = fields.One2many('project.sub.task', 'task_master_id', "Sub Task")
     line = fields.Integer("Line")
     project_id = fields.Char("Project")
     task_name = fields.Char("Task Name")
@@ -66,7 +67,7 @@ class ProjectSubTask(models.Model):
     _name = 'project.sub.task'
     _description = 'Sub Task'
 
-    employee_proj_ids = fields.Many2one('employee.project')
+    task_master_id = fields.Many2one('project.task.master')
     is_active = fields.Boolean("Active")
     project_id = fields.Many2one('employee.project', "Project Name")
     task_name = fields.Char("Taskname", required=True)
@@ -76,7 +77,7 @@ class ProjectSubTask(models.Model):
     line = fields.Char("Line")
     drawing_no = fields.Char("Drawingno")
     estimatehours_design = fields.Char("Estimated Hours(Design)")
-    variation_design = fields.Char("Variation")
+    variation_design = fields.Char("Variation", readonly=True)
 
 
 
@@ -92,6 +93,7 @@ class ProjectYearWiseSpend(models.Model):
     _name = 'project.yearwise.spend'
     _description = 'Yearwise Spend Hrs'
 
+    employee_proj_ids = fields.Many2one('employee.project')
     project_id = fields.Char("Project")
     to_date = fields.Char("To Date")
     employee_department_id = fields.Char("Department") #many2one will get from employee class

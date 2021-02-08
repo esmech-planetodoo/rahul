@@ -5,6 +5,20 @@
         <field name="model">employee.project</field>
         <field name="arch" type="xml">
             <form string="Project">
+                <header>
+                    <!--Todo: Add Functionality to button-->
+
+                    <button name="synchronise" string="Synch" class="oe_highlight"
+                            type="object" />
+                    <button name="create_subtask" string="Create SubTask" class="oe_highlight"
+                            type="object" />
+                    <button name="copy_task" string="Copy Task" class="oe_highlight"
+                            type="object" />
+                    <button name="import_task" string="Import Tasks" class="oe_highlight"
+                            type="object" />
+                    <button name="task_alert" string="Generate Task Alert" class="oe_highlight"
+                            type="object" />
+                </header>
                 <sheet>
                     <group col="4">
                         <field name="project_id"/>
@@ -62,25 +76,60 @@
                                         <notebook>
                                             <page string="Design Sub Task">
 
-                                                <!--Todo: Create notebook inside notebook-->
-<!--                                                Can be created by creating seperate view for notebook-->
-<!--                                                <field name="sub_task_ids">-->
-<!--                                                    <tree>-->
-<!--                                                        <field name="employee_proj_ids"/>-->
-<!--                                                        <field name="is_active"/>-->
-<!--                                                        <field name="project_id"/>-->
-<!--                                                        <field name="task_name"/>-->
-<!--                                                        <field name="spent_time"/>-->
-<!--                                                        <field name="master_product"/>-->
-<!--                                                        <field name="assembly"/>-->
-<!--&lt;!&ndash;                                                        <field name="line"/>&ndash;&gt;-->
-<!--                                                        <field name="drawing_no"/>-->
-<!--                                                        <field name="estimatehours_design"/>-->
-<!--                                                        <field name="variation_design"/>-->
-<!--                                                    </tree>-->
-<!--                                                </field>-->
+                                                <field name="sub_task_ids">
+                                                    <tree>
+                                                        <field name="is_active"/>
+                                                        <field name="project_id"/>
+                                                        <field name="task_name"/>
+                                                        <field name="spent_time"/>
+                                                        <field name="master_product"/>
+                                                        <field name="assembly"/>
+                                                        <field name="line"/>
+                                                        <field name="drawing_no"/>
+                                                        <field name="estimatehours_design"/>
+                                                        <field name="variation_design"/>
+                                                    </tree>
+                                                    <form >
+                                                        <sheet>
+                                                            <group col="4">
+                                                                <field name="is_active"/>
+                                                                <field name="project_id"/>
+                                                                <field name="task_name"/>
+                                                                <field name="spent_time"/>
+                                                                <field name="master_product"/>
+                                                                <field name="assembly"/>
+                                                                <field name="line"/>
+                                                                <field name="drawing_no"/>
+                                                                <field name="estimatehours_design"/>
+                                                                <field name="variation_design"/>
+                                                            </group>
+                                                        </sheet>
+                                                    </form>
+                                                </field>
                                             </page>
                                         </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Yearly Wise Spend Hours On Project">
+                            <field name="year_wise_ids">
+                                <tree>
+                                    <field name="project_id" />
+                                    <field name="to_date" />
+                                    <field name="employee_department_id" />
+                                    <field name="hours" />
+                                    <field name="remark" />
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="4">
+                                            <field name="project_id" />
+                                            <field name="to_date" />
+                                            <field name="employee_department_id" />
+                                            <field name="hours" />
+                                            <field name="remark" />
+                                        </group>
                                     </sheet>
                                 </form>
                             </field>
@@ -90,7 +139,6 @@
             </form>
         </field>
     </record>
-
 
     <record id="employee_project_filter" model="ir.ui.view">
         <field name="name">employee.project.select</field>
@@ -147,7 +195,97 @@
             </p>
         </field>
     </record>
+
+
+
+<!--    &lt;!&ndash;Yearly wise spend hours on project&ndash;&gt;-->
+
+<!--    <record id="yearly_spend_form" model="ir.ui.view">-->
+<!--            <field name="name">project.yearwise.spend.form</field>-->
+<!--            <field name="model">project.yearwise.spend</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Yearly Wise Spend Hours On Project">-->
+<!--                    <sheet>-->
+<!--                        <group col="4">-->
+<!--                            <field name="search_key"/>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="valid_from"/>-->
+<!--                            <field name="leave_allocation"/>-->
+<!--                            <field name="is_probation"/>-->
+<!--                        </group>-->
+<!--                        <footer>-->
+<!--                            <separator string="Audit" style="color: green;" col="6"/>-->
+<!--                            <hr style="color: green;"/>-->
+<!--                            <group col="8">-->
+<!--                                <field name="create_date" string="Creation Date"/>-->
+<!--                                <field name="create_uid" string="Created By"/>-->
+<!--                                <field name="write_date" string="Updated"/>-->
+<!--                                <field name="write_uid" string="Updated By"/>-->
+<!--                            </group>-->
+<!--                        </footer>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="yearly_spend_filter" model="ir.ui.view">-->
+<!--            <field name="name">project.yearwise.spend.select</field>-->
+<!--            <field name="model">project.yearwise.spend</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Yearly Wise Spend Hours On Project">-->
+<!--                    <field name="search_key"/>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="valid_from"/>-->
+<!--                    <field name="leave_allocation"/>-->
+<!--                    <field name="is_probation"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="yearly_spend_tree" model="ir.ui.view">-->
+<!--            <field name="name">project.yearwise.spend.tree</field>-->
+<!--            <field name="model">project.yearwise.spend</field>-->
+<!--            <field name="priority" eval="1"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Yearly Wise Spend Hours On Project">-->
+<!--                    <field name="search_key"/>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="valid_from"/>-->
+<!--                    <field name="leave_allocation"/>-->
+<!--                    <field name="is_probation"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="yearly_spend_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Yearly Wise Spend Hours On Project</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">project.yearwise.spend</field>-->
+<!--            <field name="view_mode">tree,form,kanban,activity</field>-->
+<!--            <field name="search_view_id" ref="esmech_timesheet.yearly_spend_filter"/>-->
+<!--            <field name="view_ids"-->
+<!--                   eval="[(5, 0, 0),-->
+<!--                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.yearly_spend_tree')}),-->
+<!--                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.yearly_spend_form')}),-->
+<!--                          (0, 0, {'view_mode': 'kanban'})]"/>-->
+
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create a new product variant-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    You must define a product for everything you sell or purchase,-->
+<!--                    whether it's a storable product, a consumable or a service.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
     <menuitem id="menu_employee_project" name="Project" parent="menu_project_root" action="employee_project_action"
               sequence="4"/>
+<!--    <menuitem id="menu_yearly_spend" name="Year Wise Spend Hours On Project" parent="menu_project_root" action="yearly_spend_action"-->
+<!--              sequence="4"/>-->
 
 </odoo>

@@ -1,3 +1,345 @@
 <odoo>
+    <record id="employee_timesheet_form" model="ir.ui.view">
+        <field name="name">employee.timesheet.form</field>
+        <field name="model">employee.timesheet</field>
+        <field name="arch" type="xml">
+            <form string="Employee Timesheet">
+                <header>
+                    <!--Todo: Add Functionality to button-->
 
+                    <button name="copy_last_week_task" string="Copy Last Week Task" class="oe_highlight"
+                            type="object"/>
+                    <button name="insert_task" string="Insert Task" class="oe_highlight"
+                            type="object"/>
+                    <button name="is_disapprove" string="Disapprove" class="oe_highlight"
+                            type="object"/>
+                    <button name="insert_subtask" string="Insert-SubTask" class="oe_highlight"
+                            type="object"/>
+                    <button name="send_approval" string="Send For Approve" class="oe_highlight"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="org_id"/>
+                        <field name="employee_id"/>
+                        <field name="week_id"/>
+                        <field name="manager_id"/>
+                        <field name="sun_working_hrs"/>
+                        <field name="mon_working_hrs"/>
+                        <field name="tue_working_hrs"/>
+                        <field name="wed_working_hrs"/>
+                        <field name="thu_working_hrs"/>
+                        <field name="fri_working_hrs"/>
+                        <field name="sat_working_hrs"/>
+                        <field name="sun_ontour"/>
+                        <field name="mon_ontour"/>
+                        <field name="tue_ontour"/>
+                        <field name="wed_ontour"/>
+                        <field name="thu_ontour"/>
+                        <field name="fri_ontour"/>
+                        <field name="sat_ontour"/>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Timesheet Line">
+                            <field name="timesheet_line_ids">
+                                <tree>
+                                    <field name="employee_timesheet_id"/>
+                                    <field name="project_name"/>
+                                    <field name="line_no"/>
+                                    <field name="task_id"/>
+                                    <field name="sub_task_id"/>
+                                    <field name="monday"/>
+                                    <field name="monday_desc"/>
+                                    <field name="tuesday"/>
+                                    <field name="tuesday_desc"/>
+                                    <field name="wednesday"/>
+                                    <field name="wednesday_desc"/>
+                                    <field name="thursday"/>
+                                    <field name="thursday_desc"/>
+                                    <field name="friday"/>
+                                    <field name="friday_desc"/>
+                                    <field name="saturday"/>
+                                    <field name="saturday_desc"/>
+                                    <field name="sunday"/>
+                                    <field name="sunday_desc"/>
+                                    <field name="total"/>
+                                    <field name="drawing_no"/>
+                                    <field name="description"/>
+                                    <field name="master_product"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="4">
+                                            <field name="employee_timesheet_id"/>
+                                            <field name="project_name"/>
+                                            <field name="line_no"/>
+                                            <field name="task_id"/>
+                                            <field name="sub_task_id"/>
+                                        </group>
+                                        <group col="4">
+                                            <field name="monday"/>
+                                            <field name="monday_desc"/>
+                                            <field name="tuesday"/>
+                                            <field name="tuesday_desc"/>
+                                            <field name="wednesday"/>
+                                            <field name="wednesday_desc"/>
+                                            <field name="thursday"/>
+                                            <field name="thursday_desc"/>
+                                            <field name="friday"/>
+                                            <field name="friday_desc"/>
+                                            <field name="saturday"/>
+                                            <field name="saturday_desc"/>
+                                            <field name="sunday"/>
+                                            <field name="sunday_desc"/>
+                                        </group>
+                                        <group col="4">
+                                            <field name="total"/>
+                                            <field name="drawing_no"/>
+                                            <field name="description"/>
+                                            <field name="master_product"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Rejection history">
+                            <field name="timesheet_history_ids">
+                                <tree>
+                                    <field name="employee_timesheet_id"/>
+                                    <field name="remark"/>
+                                    <field name="project_name"/>
+                                    <field name="name"/>
+                                    <field name="monday"/>
+                                    <field name="tuesday"/>
+                                    <field name="wednesday"/>
+                                    <field name="thursday"/>
+                                    <field name="friday"/>
+                                    <field name="saturday"/>
+                                    <field name="sunday"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="employee_timesheet_filter" model="ir.ui.view">
+        <field name="name">employee.timesheet.select</field>
+        <field name="model">employee.timesheet</field>
+        <field name="arch" type="xml">
+            <search string="Employee Timesheet">
+                <field name="org_id"/>
+                <field name="employee_id"/>
+                <field name="week_id"/>
+                <field name="manager_id"/>
+                <field name="sun_working_hrs"/>
+                <field name="mon_working_hrs"/>
+                <field name="tue_working_hrs"/>
+                <field name="wed_working_hrs"/>
+                <field name="thu_working_hrs"/>
+                <field name="fri_working_hrs"/>
+                <field name="sat_working_hrs"/>
+                <field name="sun_ontour"/>
+                <field name="mon_ontour"/>
+                <field name="tue_ontour"/>
+                <field name="wed_ontour"/>
+                <field name="thu_ontour"/>
+                <field name="fri_ontour"/>
+                <field name="sat_ontour"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="employee_timesheet_tree" model="ir.ui.view">
+        <field name="name">employee.timesheet.tree</field>
+        <field name="model">employee.timesheet</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Employee Timesheet">
+                <field name="org_id"/>
+                <field name="employee_id"/>
+                <field name="week_id"/>
+                <field name="manager_id"/>
+                <field name="sun_working_hrs"/>
+                <field name="mon_working_hrs"/>
+                <field name="tue_working_hrs"/>
+                <field name="wed_working_hrs"/>
+                <field name="thu_working_hrs"/>
+                <field name="fri_working_hrs"/>
+                <field name="sat_working_hrs"/>
+                <field name="sun_ontour"/>
+                <field name="mon_ontour"/>
+                <field name="tue_ontour"/>
+                <field name="wed_ontour"/>
+                <field name="thu_ontour"/>
+                <field name="fri_ontour"/>
+                <field name="sat_ontour"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="employee_timesheet_action" model="ir.actions.act_window">
+        <field name="name">Employee Timesheet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.timesheet</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.employee_timesheet_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.employee_timesheet_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.employee_timesheet_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+
+    <!--Week master View-->
+
+    <record id="timesheet_week_form" model="ir.ui.view">
+        <field name="name">timesheet.week.form</field>
+        <field name="model">timesheet.week</field>
+        <field name="arch" type="xml">
+            <form string="Year Wise Week Master">
+                <header>
+
+                    <!--Todo: Add Functionality to button-->
+
+                    <button name="create_week_master" string="Create Week Master" class="oe_highlight"
+                            type="object"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="year"/>
+                        <field name="is_active"/>
+                    </group>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                    <notebook>
+                        <page string="Week Master">
+                            <field name="year_ids">
+                                <tree>
+                                    <field name="week_id"/>
+                                    <field name="enable"/>
+                                    <field name="date_start"/>
+                                    <field name="week_no"/>
+                                    <field name="description"/>
+                                    <field name="is_active"/>
+                                    <field name="week_no"/>
+                                    <field name="date_end"/>
+                                    <field name="year_master_id"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="4">
+                                            <field name="week_id"/>
+                                            <field name="enable"/>
+                                            <field name="date_start"/>
+                                            <field name="week_no"/>
+                                            <field name="description"/>
+                                            <field name="is_active"/>
+                                            <field name="week_no"/>
+                                            <field name="date_end"/>
+                                            <field name="year_master_id"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="timesheet_week_filter" model="ir.ui.view">
+        <field name="name">timesheet.week.select</field>
+        <field name="model">timesheet.week</field>
+        <field name="arch" type="xml">
+            <search string="Year Wise Week Master">
+                <field name="year"/>
+                <field name="is_active"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="timesheet_week_tree" model="ir.ui.view">
+        <field name="name">timesheet.week.tree</field>
+        <field name="model">timesheet.week</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Year Wise Week Master">
+                <field name="year"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="timesheet_week_action" model="ir.actions.act_window">
+        <field name="name">Year Wise Week Master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">timesheet.week</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.timesheet_week_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.timesheet_week_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.timesheet_week_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_employee_timesheet" name="Employee Timesheet" parent="menu_timesheet_transaction"
+              action="employee_timesheet_action"
+              sequence="4"/>
+    <menuitem id="menu_timesheet_year" name="Year Wise Week Master" parent="menu_timesheet_transaction"
+              action="timesheet_week_action"
+              sequence="5"/>
 </odoo>

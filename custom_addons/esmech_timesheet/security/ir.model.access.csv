@@ -29,3 +29,10 @@ access_project_task_master,access.project.task.master,esmech_timesheet.model_pro
 access_project_sub_task,access.project.sub.task,esmech_timesheet.model_project_sub_task,base.group_user,1,1,1,1
 access_project_employee_task,access.project.employee.task,esmech_timesheet.model_project_employee_task,base.group_user,1,1,1,1
 access_project_yearwise_spend,access.project.yearwise.spend,esmech_timesheet.model_project_yearwise_spend,base.group_user,1,1,1,1
+
+
+access_employee_timesheet,access.employee.timesheet,esmech_timesheet.model_employee_timesheet,base.group_user,1,1,1,1
+access_timesheet_line,access.timesheet.line,esmech_timesheet.model_timesheet_line,base.group_user,1,1,1,1
+access_timesheet_history,access.timesheet.history,esmech_timesheet.model_timesheet_history,base.group_user,1,1,1,1
+access_timesheet_week,access.timesheet.week,esmech_timesheet.model_timesheet_week,base.group_user,1,1,1,1
+access_timesheet_year,access.timesheet.year,esmech_timesheet.model_timesheet_year,base.group_user,1,1,1,1

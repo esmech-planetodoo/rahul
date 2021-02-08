@@ -5,17 +5,19 @@ class EmployeeTimesheet(models.Model):
     _name = 'employee.timesheet'
     _description = 'Timesheet'
 
+    timesheet_line_ids = fields.One2many('timesheet.line', 'employee_timesheet_id', "Timesheet Line")
+    timesheet_history_ids = fields.One2many('timesheet.history', 'employee_timesheet_id', "Timesheet Line")
     org_id = fields.Char("Organization")
     employee_id = fields.Char("Employee")
-    weekmaster_id = fields.Many2one('timesheet.week')
-    emp_mang_id = fields.Many2one('hr.employee.master', "Manager")
-    sun_tot_working_hrs = fields.Float("Sunday (AH/WH)")
-    mon_tot_working_hrs = fields.Float("Monday (AH/WH)")
-    tue_tot_working_hrs = fields.Float("Tuesday (AH/WH)")
-    wed_tot_working_hrs = fields.Float("Wednesday (AH/WH)")
-    thu_tot_working_hrs = fields.Float("Thursday (AH/WH)")
-    fri_tot_working_hrs = fields.Float("Friday (AH/WH)")
-    sat_tot_working_hrs = fields.Float("Saturday (AH/WH)")
+    week_id = fields.Many2one('timesheet.week', 'Week')
+    manager_id = fields.Many2one('hr.employee.master', "Manager")
+    sun_working_hrs = fields.Float("Sunday (AH/WH)")
+    mon_working_hrs = fields.Float("Monday (AH/WH)")
+    tue_working_hrs = fields.Float("Tuesday (AH/WH)")
+    wed_working_hrs = fields.Float("Wednesday (AH/WH)")
+    thu_working_hrs = fields.Float("Thursday (AH/WH)")
+    fri_working_hrs = fields.Float("Friday (AH/WH)")
+    sat_working_hrs = fields.Float("Saturday (AH/WH)")
     sun_ontour = fields.Boolean("Sunday On Tour")
     mon_ontour = fields.Boolean("Monday On Tour")
     tue_ontour = fields.Boolean("Tuesday On Tour")
@@ -27,12 +29,12 @@ class EmployeeTimesheet(models.Model):
 
     # Rest below fields still to figure out
     copy_last_week_task = fields.Char("Copy Last Week Task")
-    inserttask_asmby = fields.Char("InsertTask")
-    reject = fields.Boolean("Disapprove")
-    status = fields.Char("Status")
-    week_absent = fields.Boolean("Week Absent")
-    inserttask = fields.Char("Insert-SubTask")
-    taskwise_approval_process = fields.Boolean("Send For Approve")
+    insert_task = fields.Char("InsertTask")
+    is_disapprove = fields.Boolean("Disapprove")
+    # status = fields.Char("Status")
+    # week_absent = fields.Boolean("Week Absent")
+    insert_subtask = fields.Char("Insert-SubTask")
+    send_approval = fields.Boolean("Send For Approve")
 
 
 # FIXME: fix field type after completion of remaining master class
@@ -42,61 +44,68 @@ class TimesheetLine(models.Model):
     _name = 'timesheet.line'
     _description = 'Timesheet Line'
 
-    project_id = fields.Char("Project Name")
-    line = fields.Integer("Line No")
-    saturday_desc = fields.Char("Saturday Description")
-    wednesday_desc = fields.Char("Wednesday Description")
-    sunday_desc = fields.Char("Sunday Description")
-    friday_desc = fields.Char("Friday Description")
-    monday_desc = fields.Char("Monday Description")
-    thursday_desc = fields.Char("Thursday Description")
-    tuesday_desc = fields.Char("Tuesday Description")
-    total = fields.Char("Total")
-    wednesday = fields.Char("Wednesday")
-    saturday = fields.Char("Saturday")
-    tuesday = fields.Char("Tuesday")
-    thursday = fields.Char("Thursday")
-    send_for_approval_date = fields.Char("Send For Approval Date")
-    drawingno = fields.Char("Drawing No")
-    docstatus = fields.Char("Document Status")
-    approval_to = fields.Char("Send for approval to")
-    approval_by = fields.Char("Send for approval by")
-    sunday = fields.Char("Sunday")
-    cwts_sub_task_id = fields.Char("Sub Task")
-    masterproduct = fields.Char("Master Product")
-    monday = fields.Char("Monday")
+    employee_timesheet_id = fields.Many2one('employee.timesheet')
+    project_name = fields.Char("Project Name")
+    line_no = fields.Integer("Line No")
+    task_id = fields.Char("Task")
+    sub_task_id = fields.Char("Sub Task")
+    monday = fields.Float("Monday")
+    monday_desc = fields.Text("Monday Description")
+    tuesday = fields.Float("Tuesday")
+    tuesday_desc = fields.Text("Tuesday Description")
+    wednesday = fields.Float("Wednesday")
+    wednesday_desc = fields.Text("Wednesday Description")
+    thursday = fields.Float("Thursday")
+    thursday_desc = fields.Text("Thursday Description")
+    friday = fields.Float("Friday")
+    friday_desc = fields.Text("Friday Description")
+    saturday = fields.Float("Saturday")
+    saturday_desc = fields.Text("Saturday Description")
+    sunday = fields.Float("Sunday")
+    sunday_desc = fields.Text("Sunday Description")
+    total = fields.Float("Total")
+    drawing_no = fields.Char("Drawing No")
     description = fields.Char("Description")
-    approved_by = fields.Char("Approved by")
-    cwts_task_master_id = fields.Char("Task")
-    friday = fields.Char("Friday")
+    master_product = fields.Char("Master Product")
+
+    # FIXME: Its an approval history fields have to figure out audit log for it
+
+    # send_for_approval_date = fields.Char("Send For Approval Date")
+    # doc_status = fields.Char("Document Status")
+    # approval_to = fields.Char("Send for approval to")
+    # approval_by = fields.Char("Send for approval by")
+    # approved_by = fields.Char("Approved by")
 
 
 class TimesheetHistory(models.Model):
     _name = 'timesheet.history'
     _description = 'Timesheet Line'
 
-    friday = fields.Char("Friday")
-    sunday = fields.Char("Sunday")
-    tuesday = fields.Char("Tuesday")
-    saturday = fields.Char("Saturday")
-    thursday = fields.Char("Thursday")
+    employee_timesheet_id = fields.Many2one('employee.timesheet')
     remark = fields.Char("Remark")
-    cwts_project_id = fields.Char("Project Name")
-    wednesday = fields.Char("Wednesday")
-    monday = fields.Char("Monday")
-    cwts_timesheet_id = fields.Char("Time Sheet")
-    description = fields.Char("Description")
+    project_name = fields.Char("Project Name")
     name = fields.Char("Task Name")
+    monday = fields.Char("Monday")
+    tuesday = fields.Char("Tuesday")
+    wednesday = fields.Char("Wednesday")
+    thursday = fields.Char("Thursday")
+    friday = fields.Char("Friday")
+    saturday = fields.Char("Saturday")
+    sunday = fields.Char("Sunday")
+    description = fields.Char("Description")
+
+    # cwts_timesheet_id = fields.Char("Time Sheet")
 
 
 class TimesheetWeek(models.Model):
     _name = 'timesheet.week'
     _description = 'Timesheet Week'
 
-    year_ids = fields.One2many('timesheet.year', 'week_id', "Year Master")
-    createweekmaster = fields.Char("Create Week Master")
+    year_ids = fields.One2many('timesheet.year', 'week_id', "Timesheet Year")
     year = fields.Char("Fiscal Year")
-    isactive = fields.Char("Active")
+    is_active = fields.Char("Active")
+    create_week_master = fields.Char("Create Week Master")
+
 
 
 class TimesheetYear(models.Model):
@@ -105,9 +114,9 @@ class TimesheetYear(models.Model):
 
     week_id = fields.Many2one('timesheet.week')
     enable = fields.Char("Enable")
-    datestart = fields.Char("Start Date")
-    weekno = fields.Char("Week No")
+    date_start = fields.Char("Start Date")
+    week_no = fields.Char("Week No")
     description = fields.Char("Description")
-    isactive = fields.Char("Active")
+    is_active = fields.Char("Active")
     date_end = fields.Char("End Date")
-    cwts_yearmaster_id = fields.Char("Year")
+    year_master_id = fields.Char("Year")
