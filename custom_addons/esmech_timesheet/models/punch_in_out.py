@@ -8,7 +8,7 @@ class PunchDetails(models.Model):
     _description = 'Maintenance Stage'
 
     attendence_ids = fields.One2many('attendance.details', 'punch_id', "attendance id")
-    organization = fields.Char("Organization")
+    organization = fields.Many2one('organization.master', "Organization")
     employee_id = fields.Char("Employee ID")
     employee = fields.Many2one("hr.employee.master", "Employee")
     punch_date = fields.Date("Punch Date")

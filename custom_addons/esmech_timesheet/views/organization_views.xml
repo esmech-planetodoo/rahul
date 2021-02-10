@@ -1,0 +1,104 @@
+<odoo>
+    <!--Leave Type View-->
+    <record id="organization_form" model="ir.ui.view">
+        <field name="name">organization.master.form</field>
+        <field name="model">organization.master</field>
+        <field name="arch" type="xml">
+            <form string="Organization">
+                <sheet>
+                    <group col="4">
+                        <field name="search_key"/>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="is_active"/>
+                        <field name="is_summary"/>
+                        <field name="organization_type"/>
+                        <field name="currency_id"/>
+                        <field name="is_allowed_period_control"/>
+                        <field name="calender_id"/>
+                        <field name="general_ledger"/>
+                    </group>
+                    <footer>
+                        <separator string="Audit" style="color: green;" col="6"/>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="organization_filter" model="ir.ui.view">
+        <field name="name">organization.master.select</field>
+        <field name="model">organization.master</field>
+        <field name="arch" type="xml">
+            <search string="Organization">
+                <field name="search_key"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="is_active"/>
+                <field name="is_summary"/>
+                <field name="organization_type"/>
+                <field name="currency_id"/>
+                <field name="is_allowed_period_control"/>
+                <field name="calender_id"/>
+                <field name="general_ledger"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="organization_tree" model="ir.ui.view">
+        <field name="name">organization.master.tree</field>
+        <field name="model">organization.master</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Organization">
+                <field name="search_key"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="is_active"/>
+                <field name="is_summary"/>
+                <field name="organization_type"/>
+                <field name="currency_id"/>
+                <field name="is_allowed_period_control"/>
+                <field name="calender_id"/>
+                <field name="general_ledger"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="organization_action" model="ir.actions.act_window">
+        <field name="name">Organization</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">organization.master</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="search_view_id" ref="esmech_timesheet.organization_filter"/>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree','view_id': ref('esmech_timesheet.organization_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('esmech_timesheet.organization_form')}),
+                          (0, 0, {'view_mode': 'kanban'})]"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product variant
+            </p>
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="organization_menu" name="" parent="esmech_timesheet.menu_enterprise"
+              action="organization_action" sequence="15"/>
+</odoo>

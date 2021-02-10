@@ -5,3 +5,4 @@ from . import hr_employee_master
 from . import punch_in_out
 from . import employee_timesheet
 from . import employee_project
+from . import organization

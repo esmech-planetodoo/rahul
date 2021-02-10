@@ -1,50 +1,68 @@
 <odoo>
 
     <record id="punch_details_form" model="ir.ui.view">
-            <field name="name">punch.details.form</field>
-            <field name="model">punch.details</field>
-            <field name="arch" type="xml">
-                <form string="Details">
-                    <sheet>
-                            <!-- Form uppper body -->
-                            <group col="6">
-                                <field name="organization" />
-                                <field name="employee_id"/>
-                                <field name="employee"/>
-                            </group>
-                            <group col="6">
-                                <field name="punch_date"/>
-                                <field name="punch_in_time" widget="float_time"/>
-                                <field name="punch_out_time" widget="float_time"/>
-                                <field name="shift_hours"/>
-                                <field name="hours_worked"/>
-                            </group>
-                            <group col="6">
-                                <field name="manual"/>
-                                <field name="attendance_status"/>
-                                <field name="reason"/>
-                                <field name="leave_type"/>
-                                <field name="leave_status"/>
-                            </group>
+        <field name="name">punch.details.form</field>
+        <field name="model">punch.details</field>
+        <field name="arch" type="xml">
+            <form string="Details">
+                <sheet>
+                    <!-- Form uppper body -->
+                    <group col="6">
+                        <field name="organization"/>
+                        <field name="employee_id"/>
+                        <field name="employee"/>
+                    </group>
+                    <group col="6">
+                        <field name="punch_date"/>
+                        <field name="punch_in_time" widget="float_time"/>
+                        <field name="punch_out_time" widget="float_time"/>
+                        <field name="shift_hours"/>
+                        <field name="hours_worked"/>
+                    </group>
+                    <group col="6">
+                        <field name="manual"/>
+                        <field name="attendance_status"/>
+                        <field name="reason"/>
+                        <field name="leave_type"/>
+                        <field name="leave_status"/>
+                    </group>
 
-                            <!-- Form Lower body -->
-                            <notebook>
-                                <page  string="Details">
-                                    <field name="attendence_ids">
-                                        <tree editable="bottom">
-                                            <field name="employee_id"/>
-                                            <field name="punch_id"/>
-                                            <field name="punch_date"/>
-                                            <field name="punch_time"/>
-                                            <field name="processed"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                            </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                    <!-- Form Lower body -->
+                    <notebook>
+                        <page string="Details">
+                            <field name="attendence_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="punch_id"/>
+                                    <field name="punch_date"/>
+                                    <field name="punch_time"/>
+                                    <field name="processed"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="timesheet_punch_tree" model="ir.ui.view">
+        <field name="name">punch.details.tree</field>
+        <field name="model">punch.details</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Year Wise Week Master">
+                <field name="organization"/>
+                <field name="employee_id"/>
+                <field name="employee"/>
+                <field name="punch_date"/>
+                <field name="punch_in_time" />
+                <field name="punch_out_time" />
+                <field name="shift_hours"/>
+                <field name="hours_worked"/>
+            </tree>
+        </field>
+    </record>
 
     <!-- Punch In/Out : actions -->
     <record id="timesheet_punch_action" model="ir.actions.act_window">
@@ -52,15 +70,11 @@
         <field name="res_model">punch.details</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            Add Member with punch details
-          </p>
+            <p class="o_view_nocontent_smiling_face">
+                Add Member with punch details
+            </p>
         </field>
     </record>
-
-
-
-
 
 
 </odoo>

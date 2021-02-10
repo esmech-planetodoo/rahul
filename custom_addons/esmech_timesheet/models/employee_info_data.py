@@ -109,3 +109,37 @@ class EmployeeBankInfo(models.Model):
     branch_name = fields.Char("Branch Name", readonly=True)
     description = fields.Char("Description", readonly=True)
     default = fields.Char("Default")
+
+
+class UserContact(models.Model):
+    _name = 'employee.user.contact'
+    _description = 'User/Contact'
+    _rec_name = 'name'
+
+    #FIXME : Create view for class
+    organization_id = fields.Many2one('organization.master', "Organization")
+    name = fields.Char("Name")
+    description = fields.Text("Description")
+    password = fields.Char("Password")
+    is_active = fields.Boolean("Active")
+    client_id = fields.Char("Client")
+    email = fields.Char("email")
+    supervisor_id = fields.Char("Supervisor")
+    partner_id = fields.Char("Business Partner")
+    email_server_user = fields.Char("Email Server Username")
+    email_server_password = fields.Char("Email Server Password")
+    alt_phone = fields.Char("Alternative Phone")
+    birthday = fields.Char("Birthday")
+    partner_location_id = fields.Char("Partner Address")
+    phone = fields.Char("Phone")
+    fax = fields.Char("Fax")
+    position = fields.Char("Position")
+    first_name = fields.Char("First Name")
+    last_name = fields.Char("Last Name")
+    user_name = fields.Char("User Name")
+    default_client_id = fields.Char("Default Client")
+    default_organization_id = fields.Char("Default Organization")
+    default_language_id = fields.Char("Default Language")
+    default_role_id = fields.Char("Default Role")
+    default_warehouse_id = fields.Char("Default Warehouse")
+    is_locked = fields.Boolean('Locked')

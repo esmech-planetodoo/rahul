@@ -49,7 +49,7 @@ class EmployeeRecord(models.Model):
         ('weekly', 'Weekly'),
     ], string='Rotation')
     business_partner = fields.Char("Business Partner")
-    user_contact = fields.Char("User/Contact")
+    user_contact = fields.Many2one('employee.user.contact', "User/Contact")
     add_data = fields.Char("ADD Data")
     image_1920 = fields.Image(default=_default_image)
 

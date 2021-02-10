@@ -21,6 +21,7 @@ Lots of reporting on time and employee tracking are provided.
     'data': [
         'security/ir.model.access.csv',
         'views/menu_items_views.xml',
+        'views/organization_views.xml',
         'views/employee_job_views.xml',
         'views/employee_info_data_views.xml',
         'views/hr_employee_master_views.xml',
