@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Sale order form view-->
+
+    <record model="ir.ui.view" id="import_department_view_wizard">
+        <field name="name">import.department.view.wizard</field>
+        <field name="model">import.department</field>
+        <field name="arch" type="xml">
+            <form string="Import Data">
+                <group>
+                    <field name="upload_file"/>
+                </group>
+                <footer>
+                    <button name="import_department" string="Import Department" type="object" class="oe_highlight"/>
+                </footer>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="action_import_dept_wizard" model="ir.actions.act_window">
+        <field name="name">Import Department</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.department</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <!-- TODO: check if we need this -->
+<!--        <field name="binding_model_id" ref="mdm_esmech.model_extc_department" />-->
+<!--        <field name="binding_view_types">list,form</field>-->
+    </record>
+
+</odoo>

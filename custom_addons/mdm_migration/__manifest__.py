@@ -1,0 +1,23 @@
+{
+    'name': 'MDM Migration',
+    'Version': '1.0.0',
+    'category': 'Generic Modules',
+    'description': """ This module is in odoo 14 enterprise and all customization in product""",
+    'author': 'planet-odoo',
+    'Website': 'www.planet-odoo.com',
+    'depends': ['base'],
+    'data': [
+        # 'views/mrp_bom.xml',
+        'security/ir.model.access.csv',
+        'wizard/import_logger_wizard.xml',
+        'wizard/res_users_wizard_view.xml',
+        # 'wizard/timesheet_migration_views.xml',
+        # 'wizard/department_wizard_view.xml',
+        # 'wizard/short_description_wizard_view.xml',
+        'views/migration_logger_view.xml',
+    ],
+    'license': 'LGPL-3',
+    # 'images': ["static/description/planeicon.png"],
+    'installable': True,
+    'auto_install': False,
+}
