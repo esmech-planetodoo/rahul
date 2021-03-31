@@ -1,4 +1,6 @@
-from odoo import fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class PunchDetails(models.Model):
@@ -9,41 +11,17 @@ class PunchDetails(models.Model):
 
     attendence_ids = fields.One2many('attendance.details', 'punch_id', "attendance id")
     organization = fields.Many2one('organization.master', "Organization")
-    employee_id = fields.Char("Employee ID")
+    employee_id = fields.Char("Employee ID", readonly=True)
     employee = fields.Many2one("hr.employee.master", "Employee")
-    punch_date = fields.Date("Punch Date")
-    punch_in_time = fields.Float("Punch In Time (HH:MM:SS)")
-    punch_out_time = fields.Float("Punch Out Time (HH:MM:SS)")
-    shift_hours = fields.Float("Shift Hours (HH:MM:SS)")
-    hours_worked = fields.Float("Hours Worked (HH:MM:SS)")
+    punch_date = fields.Date("Punch Date", default=datetime.today())
+    punch_in_time = fields.Float("Punch In Time (HH:MM)", default=0.0)
+    punch_out_time = fields.Float("Punch Out Time (HH:MM)", default=0.0)
+    shift_hours = fields.Float("Shift Hours (HH:MM)")
+    hours_worked = fields.Float("Hours Worked (HH:MM)", compute='_compute_hours_worked')
     reason = fields.Text("Reason")
     manual = fields.Boolean("Manual")
     attendance_status = fields.Many2one('attendance.status', 'Attendance Status')
-    # attendance_status = fields.Selection([
-    #     ('Absent', "Absent"),
-    #     ('Comp off', "Comp off"),
-    #     ('Half day', "Half day"),
-    #     ('Holiday', "Holiday"),
-    #     ('Leave', "Leave"),
-    #     ('Loss of pay', "Loss of pay"),
-    #     ('Maternity leave', "Maternity leave"),
-    #     ('On tour', "On tour"),
-    #     ('Overtime hour', "Overtime hour"),
-    #     ('Present', "Present"),
-    #     ('Weekend', "Weekend"),
-    #     ('Worked On Weekend', "Worked On Weekend"),
-    # ], string="Attendance Status")
-
     leave_type = fields.Many2one('leave.type', 'Leave Type')
-    # leave_type = fields.Selection([
-    #     ('Casual Leave', "Casual Leave"),
-    #     ('Comp off', "Comp off"),
-    #     ('Leave without pay', "Leave without pay"),
-    #     ('Other leave', "Other leave"),
-    #     ('Priviledged leave', "Priviledged leave"),
-    #     ('short leave', "short leave"),
-    #     ('sick leave', "sick leave"),
-    # ], string="Leave Type")
 
     leave_status = fields.Selection([
         ('Approved', "Approved"),
@@ -52,13 +30,64 @@ class PunchDetails(models.Model):
         ('Rejected', "Rejected"),
     ], string="Leave Status")
 
+    @api.onchange('punch_in_time', 'punch_out_time')
+    def _check_hours(self):
+        if self.punch_in_time < 0:
+            raise ValidationError(_('Time should be greater than 0'))
+        elif self.punch_in_time > 23.99:
+            raise ValidationError("Time should be below 24")
+        elif self.punch_out_time < 0.0:
+            raise ValidationError("time should be greater than 0")
+        elif self.punch_out_time >= 23.59:
+            raise ValidationError("Time should be below 24")
+
+    @api.depends('punch_in_time', 'punch_out_time')
+    def _compute_hours_worked(self):
+        for rec in self:
+            total_hours = rec.punch_out_time - rec.punch_in_time
+            if total_hours < 0:
+                rec.hours_worked = 24 + total_hours
+            else:
+                rec.hours_worked = total_hours
+
+    @api.model
+    def create(self, vals):
+        attendence_vals = {
+            'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id ,
+            'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,
+            'punch_time': vals['punch_in_time'] if 'punch_in_time' in vals else self.punch_in_time,
+        }
+        vals['attendence_ids'] = [(0, 0, attendence_vals)]
+        print('vals>>>>>>>>>>>>', vals)
+        rec = super(PunchDetails, self).create(vals)
+        return rec
+
+    def write(self, vals):
+        attendence_vals = {
+            'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id,
+            'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,
+            'punch_time': vals['punch_in_time'] if 'punch_in_time' in vals else self.punch_in_time,
+        }
+        vals['attendence_ids'] = [(0, 0, attendence_vals)]
+        rec = super(PunchDetails, self).write(vals)
+        return rec
+
+    @api.onchange('employee')
+    def emp_id(self):
+        emp_obj = self.env['hr.employee.master'].search([('id', '=', self.employee.id)])
+        # print(emp_obj.employee_roll_no)
+        # self.employee_id = emp_obj.employee_roll_no
+        self.env['punch.details'].create({
+            'employee_id': emp_obj.employee_roll_no,
+        })
+
 
 class AttendanceDetails(models.Model):
     _name = 'attendance.details'
     _description = 'Attendence details of employees'
 
     punch_id = fields.Many2one('punch.details', "punch id")
-    active = fields.Boolean("Active")
+    is_active = fields.Boolean("Active")
     punch_date = fields.Date("Punch Date")
     employee_id = fields.Char("Employee ID")
     punch_time = fields.Char("Punch Time")

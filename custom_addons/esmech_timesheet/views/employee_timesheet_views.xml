@@ -7,16 +7,16 @@
                 <header>
                     <!--Todo: Add Functionality to button-->
 
-                    <button name="copy_last_week_task" string="Copy Last Week Task" class="oe_highlight"
-                            type="object"/>
-                    <button name="insert_task" string="Insert Task" class="oe_highlight"
-                            type="object"/>
-                    <button name="is_disapprove" string="Disapprove" class="oe_highlight"
-                            type="object"/>
-                    <button name="insert_subtask" string="Insert-SubTask" class="oe_highlight"
-                            type="object"/>
-                    <button name="send_approval" string="Send For Approve" class="oe_highlight"
-                            type="object"/>
+<!--                    <button name="copy_last_week_task" string="Copy Last Week Task" class="oe_highlight"-->
+<!--                            type="object"/>-->
+<!--                    <button name="insert_task" string="Insert Task" class="oe_highlight"-->
+<!--                            type="object"/>-->
+<!--                    <button name="is_disapprove" string="Disapprove" class="oe_highlight"-->
+<!--                            type="object"/>-->
+<!--                    <button name="insert_subtask" string="Insert-SubTask" class="oe_highlight"-->
+<!--                            type="object"/>-->
+<!--                    <button name="send_approval" string="Send For Approve" class="oe_highlight"-->
+<!--                            type="object"/>-->
                 </header>
                 <sheet>
                     <group col="4">

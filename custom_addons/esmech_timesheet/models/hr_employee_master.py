@@ -65,3 +65,10 @@ class EmployeeRecord(models.Model):
         for record in self:
             record.full_name = (record.first_name or '') + ' ' + (record.middle_name or '') + ' ' + (
                     record.last_name or '')
+
+    def name_get(self):
+        res = []
+        for rec in self:
+            res.append((rec.id, '%s - %s' % (rec.name, rec.employee_roll_no)))
+        print(res)
+        return res

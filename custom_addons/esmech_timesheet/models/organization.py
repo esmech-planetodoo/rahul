@@ -11,7 +11,7 @@ class Organization(models.Model):
     organization_id = fields.Char("Organization")
     organization_type = fields.Char("Organization Type")
     general_ledger = fields.Char("General Ledger")
-    calender_id = fields.Date("Calendar")
+    calender_id = fields.Char("Calendar")
     currency_id = fields.Many2one('res.currency')
     is_active = fields.Boolean("Active")
     is_allowed_period_control = fields.Boolean("Allow Period Control")
@@ -28,3 +28,5 @@ class Organization(models.Model):
 class OrganizationInfo(models.Model):
     _name = 'organization.info'
     _description = 'Organization Details'
+
+
