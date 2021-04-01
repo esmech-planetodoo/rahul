@@ -9,7 +9,7 @@
                     <!-- Form uppper body -->
                     <group col="6">
                         <field name="organization"/>
-                        <field name="employee_id"/>
+                        <field name="employee_id" force_save="1"/>
                         <field name="employee"/>
                     </group>
                     <group col="6">

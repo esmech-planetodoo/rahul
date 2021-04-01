@@ -14,7 +14,7 @@ class PunchDetails(models.Model):
     employee_id = fields.Char("Employee ID", readonly=True)
     employee = fields.Many2one("hr.employee.master", "Employee")
     punch_date = fields.Date("Punch Date", default=datetime.today())
-    punch_in_time = fields.Float("Punch In Time (HH:MM)", default=0.0)
+    punch_in_time = fields.Char("Punch In Time (HH:MM)")
     punch_out_time = fields.Float("Punch Out Time (HH:MM)", default=0.0)
     shift_hours = fields.Float("Shift Hours (HH:MM)")
     hours_worked = fields.Float("Hours Worked (HH:MM)", compute='_compute_hours_worked')
@@ -30,6 +30,10 @@ class PunchDetails(models.Model):
         ('Rejected', "Rejected"),
     ], string="Leave Status")
 
+    @api.onchange('punch_in_time')
+    def float_to_hours(self):
+
+
     @api.onchange('punch_in_time', 'punch_out_time')
     def _check_hours(self):
         if self.punch_in_time < 0:
@@ -43,7 +47,9 @@ class PunchDetails(models.Model):
 
     @api.depends('punch_in_time', 'punch_out_time')
     def _compute_hours_worked(self):
+        print(self.punch_in_time)
         for rec in self:
+            print(rec.punch_in_time)
             total_hours = rec.punch_out_time - rec.punch_in_time
             if total_hours < 0:
                 rec.hours_worked = 24 + total_hours
@@ -53,33 +59,32 @@ class PunchDetails(models.Model):
     @api.model
     def create(self, vals):
         attendence_vals = {
-            'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id ,
-            'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,
-            'punch_time': vals['punch_in_time'] if 'punch_in_time' in vals else self.punch_in_time,
-        }
-        vals['attendence_ids'] = [(0, 0, attendence_vals)]
-        print('vals>>>>>>>>>>>>', vals)
-        rec = super(PunchDetails, self).create(vals)
-        return rec
-
-    def write(self, vals):
-        attendence_vals = {
             'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id,
             'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,
             'punch_time': vals['punch_in_time'] if 'punch_in_time' in vals else self.punch_in_time,
         }
         vals['attendence_ids'] = [(0, 0, attendence_vals)]
+        rec = super(PunchDetails, self).create(vals)
+        return rec
+
+    def write(self, vals):
+        if 'employee_id' and 'attendence_ids' not in vals:
+            attendence_vals = {
+                'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id,
+                'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,
+                'punch_time': vals['punch_in_time'] if 'punch_in_time' in vals else self.punch_in_time,
+            }
+            vals.update({'attendence_ids': [(0, 0, attendence_vals)]})
         rec = super(PunchDetails, self).write(vals)
         return rec
 
     @api.onchange('employee')
     def emp_id(self):
         emp_obj = self.env['hr.employee.master'].search([('id', '=', self.employee.id)])
-        # print(emp_obj.employee_roll_no)
-        # self.employee_id = emp_obj.employee_roll_no
-        self.env['punch.details'].create({
-            'employee_id': emp_obj.employee_roll_no,
-        })
+        if emp_obj.employee_roll_no:
+            self.employee_id = emp_obj.employee_roll_no
+        else:
+            self.employee_id = '0000'
 
 
 class AttendanceDetails(models.Model):

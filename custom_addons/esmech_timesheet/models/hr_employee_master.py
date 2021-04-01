@@ -70,5 +70,4 @@ class EmployeeRecord(models.Model):
         res = []
         for rec in self:
             res.append((rec.id, '%s - %s' % (rec.name, rec.employee_roll_no)))
-        print(res)
         return res
