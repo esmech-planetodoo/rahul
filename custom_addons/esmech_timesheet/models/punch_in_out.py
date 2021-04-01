@@ -67,6 +67,7 @@ class PunchDetails(models.Model):
         rec = super(PunchDetails, self).create(vals)
         return rec
 
+    # record creation on punch date and punch in time to be fixed
     def write(self, vals):
         if 'employee_id' and 'attendence_ids' not in vals:
             attendence_vals = {
