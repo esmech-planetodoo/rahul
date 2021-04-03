@@ -47,16 +47,16 @@
                         <field name="shift"/>
                     </group>
 
-                    <div>
-                        <h1 style="color: green;">Audit</h1>
-                        <hr style="color: green;"/>
-                        <group col="8">
-                            <field name="create_date" string="Creation Date"/>
-                            <field name="create_uid" string="Created By"/>
-                            <field name="write_date" string="Updated"/>
-                            <field name="write_uid" string="Updated By"/>
-                        </group>
-                    </div>
+<!--                    <div>-->
+<!--                        <h1 style="color: green;">Audit</h1>-->
+<!--                        <hr style="color: green;"/>-->
+<!--                        <group col="8">-->
+<!--                            <field name="create_date" string="Creation Date"/>-->
+<!--                            <field name="create_uid" string="Created By"/>-->
+<!--                            <field name="write_date" string="Updated"/>-->
+<!--                            <field name="write_uid" string="Updated By"/>-->
+<!--                        </group>-->
+<!--                    </div>-->
                     <notebook>
                         <page string="Personal information">
                             <field name="personalinfo_data_ids">
@@ -302,6 +302,16 @@
                             </field>
                         </page>
                     </notebook>
+                    <div>
+                        <h1 style="color: green;">Audit</h1>
+                        <hr style="color: green;"/>
+                        <group col="8">
+                            <field name="create_date" string="Creation Date"/>
+                            <field name="create_uid" string="Created By"/>
+                            <field name="write_date" string="Updated"/>
+                            <field name="write_uid" string="Updated By"/>
+                        </group>
+                    </div>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>

@@ -1,6 +1,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import datetime
+import re
 
 
 class PunchDetails(models.Model):
@@ -8,19 +9,20 @@ class PunchDetails(models.Model):
 
     _name = 'punch.details'
     _description = 'Maintenance Stage'
+    _rec_name = 'employee'
 
     attendence_ids = fields.One2many('attendance.details', 'punch_id', "attendance id")
     organization = fields.Many2one('organization.master', "Organization")
     employee_id = fields.Char("Employee ID", readonly=True)
-    employee = fields.Many2one("hr.employee.master", "Employee")
-    punch_date = fields.Date("Punch Date", default=datetime.today())
-    punch_in_time = fields.Char("Punch In Time (HH:MM)")
+    employee = fields.Many2one("hr.employee.master", "Employee", required=True)
+    punch_date = fields.Date("Punch Date", required=True, default=datetime.today())
+    punch_in_time = fields.Float("Punch In Time (HH:MM)")
     punch_out_time = fields.Float("Punch Out Time (HH:MM)", default=0.0)
     shift_hours = fields.Float("Shift Hours (HH:MM)")
     hours_worked = fields.Float("Hours Worked (HH:MM)", compute='_compute_hours_worked')
     reason = fields.Text("Reason")
     manual = fields.Boolean("Manual")
-    attendance_status = fields.Many2one('attendance.status', 'Attendance Status')
+    attendance_status = fields.Many2one('attendance.status', 'Attendance Status', required=True)
     leave_type = fields.Many2one('leave.type', 'Leave Type')
 
     leave_status = fields.Selection([
@@ -29,10 +31,6 @@ class PunchDetails(models.Model):
         ('Pending', "Pending"),
         ('Rejected', "Rejected"),
     ], string="Leave Status")
-
-    @api.onchange('punch_in_time')
-    def float_to_hours(self):
-
 
     @api.onchange('punch_in_time', 'punch_out_time')
     def _check_hours(self):
@@ -67,9 +65,9 @@ class PunchDetails(models.Model):
         rec = super(PunchDetails, self).create(vals)
         return rec
 
-    # record creation on punch date and punch in time to be fixed
+    # override function to update values in many2one
     def write(self, vals):
-        if 'employee_id' and 'attendence_ids' not in vals:
+        if 'punch_date' in vals or 'punch_in_time' in vals and 'employee_id' not in vals:
             attendence_vals = {
                 'employee_id': vals['employee_id'] if 'employee_id' in vals else self.employee_id,
                 'punch_date': vals['punch_date'] if 'punch_date' in vals else self.punch_date,

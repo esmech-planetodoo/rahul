@@ -27,12 +27,12 @@ class EmployeeRecord(models.Model):
                                         string='Employee Leave details')
     employeeshift_ids = fields.One2many('employee.shift', 'employee_records_id', string='Employee Shift details')
     name = fields.Char("Name", related="full_name")
-    first_name = fields.Char("First Name")
+    first_name = fields.Char("First Name", required=True)
     middle_name = fields.Char("Middle Name")
-    last_name = fields.Char("Last Name")
+    last_name = fields.Char("Last Name", required=True)
     full_name = fields.Char(string="Full Name", store=True, compute="_full_name")
     organization = fields.Char("Organization", required="True")
-    employee_roll_no = fields.Char("Employee Id", default="0000")
+    employee_roll_no = fields.Char("Employee Id", default="0000", required=True)
     card_no = fields.Char("Card No", default="0011096340")
     email = fields.Char("Email")
     alter_email = fields.Char("Alternate Email")
@@ -71,3 +71,4 @@ class EmployeeRecord(models.Model):
         for rec in self:
             res.append((rec.id, '%s - %s' % (rec.name, rec.employee_roll_no)))
         return res
+

@@ -10,7 +10,7 @@ class PersonalInformationData(models.Model):
     _order = 'employee_name'
 
     employee_records_id = fields.Many2one('hr.employee.master')
-    employee_name = fields.Char("Employee")
+    employee_name = fields.Char("Employee", compute='_emp_name')
     father_name = fields.Char("Father Name")
     mother_name = fields.Char("Mother Name")
     nick_name = fields.Char("Nick Name")
@@ -46,6 +46,15 @@ class PersonalInformationData(models.Model):
     esi_no = fields.Char("ESI No.")
     uid_no = fields.Char("Unique Identity Card No.")
     is_active = fields.Boolean("Active")
+
+
+    #Not getting id
+    def _emp_name(self):
+        # for rec in self:
+        #     emp_id = self.env.context['active_id']
+        # emp_id = self.env['hr.employee.master'].browse(self.env.context['id'])
+        emp_obj = self.env['hr.employee.master'].search([('id', '=', self.employee_records_id.id)])
+        print(emp_obj.employee_roll_no)
 
 
 class EmployeeLocation(models.Model):
@@ -116,7 +125,7 @@ class UserContact(models.Model):
     _description = 'User/Contact'
     _rec_name = 'name'
 
-    #FIXME : Create view for class
+    # FIXME : Create view for class
     organization_id = fields.Many2one('organization.master', "Organization")
     name = fields.Char("Name")
     description = fields.Text("Description")

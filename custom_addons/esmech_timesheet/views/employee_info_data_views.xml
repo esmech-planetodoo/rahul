@@ -8,6 +8,7 @@
                 <form string="Personal information">
                     <sheet>
                         <group col="4">
+                            <field name="employee_records_id"/>
                             <field name="employee_name"/>
                             <field name="father_name"/>
                             <field name="mother_name"/>
